@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
-import RegisterPage from './pages/RegisterPage';
+import RegistrationPage from './pages/RegistrationPage';
 import WelcomePage from './pages/WelcomePage';
 
 import { Colors } from "./styles";
@@ -17,8 +17,8 @@ const Router = props => {
                     header: null
                 }
             },
-            "RegisterPage": {
-                screen: RegisterPage,
+            "RegistrationPage": {
+                screen: RegistrationPage,
                 navigationOptions: {
                     title: 'Novo Usuário'
                 }

@@ -8,7 +8,7 @@ import {
     ScrollView
 } from 'react-native';
 
-class RegisterPage extends Component {
+class RegistrationPage extends Component {
 
     teste() {
 
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RegisterPage;
+export default RegistrationPage;
