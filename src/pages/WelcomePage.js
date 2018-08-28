@@ -17,8 +17,8 @@ class WelcomePage extends Component {
         super(props);
     }
 
-    openRegisterPage(){
-        this.props.navigation.replace("RegisterPage");
+    openRegistrationPage(){
+        this.props.navigation.replace("RegistrationPage");
     }
 
     render() {
@@ -44,7 +44,7 @@ class WelcomePage extends Component {
                 <Button
                     title = "Vamos Começar!"
                     color = { Colors.appDefaultColor }
-                    onPress = { () => this.openRegisterPage() }
+                    onPress = { () => this.openRegistrationPage() }
                 />
 
             </View>
