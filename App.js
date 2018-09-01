@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 import reduxThunk from 'redux-thunk';
 
 import ICanTakApp from "./src/ICanTalkApp";
-import rootReducer from "./src/reducers";
+import rootReducer from "./src/redux/reducers";
 
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(reduxThunk)

@@ -5,9 +5,8 @@ import {
 import { connect } from 'react-redux'
 
 import Router from './Router'
-import { isRegisteredUser } from "./utils";
-import { setIsRegisteredUser }  from "./actions";
-
+import { isRegisteredUser } from "./assets/utils";
+import { setIsRegisteredUser }  from "./redux/actions";
 
 //TODO - RETIRAR ESTE CÓDIO
 import { YellowBox } from 'react-native';

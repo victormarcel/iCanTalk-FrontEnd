@@ -1,3 +1,5 @@
 export const Colors = {
-    appDefaultColor: "#007DD6"
+    androidStatusBarColor: "#1565C0",
+    appDefaultColor: "#1976D2",
+    defaultBorderColor: "#bbb"
 }
