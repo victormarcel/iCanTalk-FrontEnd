@@ -7,6 +7,8 @@ import {
     Dimensions
 } from 'react-native';
 
+import { Colors } from "../res/styles/colors";
+
 const ConversationItem = (props) => {
 
     const { conversation } = props;
@@ -26,7 +28,7 @@ const ConversationItem = (props) => {
 
     }
 
-    return (
+    return (        
         <View style = { styles.row }>
             <View style = { styles.avatarView }>
                 <Image 
@@ -55,6 +57,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
 
         borderBottomWidth: 1,
+        borderColor: Colors.defaultBorderColor,
         paddingTop: defaultPadding,
         paddingBottom: defaultPadding
     },

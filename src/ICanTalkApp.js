@@ -8,7 +8,6 @@ import Router from './Router'
 import { isRegisteredUser } from "./assets/utils";
 import { setIsRegisteredUser }  from "./redux/actions";
 
-
 //TODO - RETIRAR ESTE CÓDIO
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings([

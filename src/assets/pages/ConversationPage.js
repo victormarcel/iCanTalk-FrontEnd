@@ -10,9 +10,13 @@ import {
 
 import SearchInputTop from "../components/SearchInputTop";
 import ConversationItem from "../components/ConversationItem";
+import FooterButtons from "../components/FooterButtons";
 
+import { returnStringByCode } from "../res/strings";
 
-import logo from "../res/images/baseline_more_vert_white_18dp.png";
+import headerOptionsIcon from "../res/images/baseline_more_vert_white_18dp.png";
+import socialNetworksIcon from "../res/images/baseline_public_black_18dp.png";
+import friendsListIcon from "../res/images/round_view_list_black_18dp.png";
 
 const conversationsMock = [
     {
@@ -86,7 +90,7 @@ class ConversationPage extends Component {
         headerRight: (
             <TouchableOpacity onPress = { () => console.log("teste") }>
                 <Image
-                    source = { logo }
+                    source = { headerOptionsIcon }
                 />
             </TouchableOpacity>
         ),
@@ -106,6 +110,12 @@ class ConversationPage extends Component {
                         keyExtractor = { item => item.id }
                     />
                 </ScrollView>
+                <FooterButtons buttons = { 
+                    [
+                        {icon: friendsListIcon, label: returnStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL")},
+                        {icon: socialNetworksIcon, label: returnStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL")}
+                    ] 
+                }/>
             </View>
         );
     }

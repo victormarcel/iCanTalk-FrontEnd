@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 
 import { returnStringByCode } from "../res/strings";
+import { Colors } from "../res/styles/colors";
 
 const SearchInputTop = () => {
     return (
@@ -14,7 +15,8 @@ const SearchInputTop = () => {
 const styles = StyleSheet.create({
     searchView: {
         padding: 8,
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        borderColor: Colors.defaultBorderColor
     }
 });
 

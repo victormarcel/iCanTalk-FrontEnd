@@ -26,5 +26,9 @@ const ptBrStrings = {
     WELCOME_TEXT_5: "estudar uma nova língua!",
 
     REGISTER_TEXT_1: "Preencha os campos abaixo e comece",
-    REGISTER_TEXT_2: "a praticar um novo idioma agora mesmo!!!"
+    REGISTER_TEXT_2: "a praticar um novo idioma agora mesmo!!!",
+
+    CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL: "Novos Amigos",
+    CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos"
+
 }

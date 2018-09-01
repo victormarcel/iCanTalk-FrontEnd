@@ -35,7 +35,7 @@ const Router = props => {
             navigationOptions: {
                 headerTintColor: 'white',
                 headerStyle: {
-                    backgroundColor: '#007DD6',
+                    backgroundColor: Colors.appDefaultColor,
                     borderBottomWidth: 1,
                     borderBottomColor: Colors.appDefaultColor
                 },
