@@ -8,9 +8,9 @@ import {
     Button
 } from 'react-native';
 
-import logo from "../images/logo.png";
-import { Colors } from "../styles"
-import { returnStringByCode } from "../strings";
+import logo from "../res/images/logo.png";
+import { Colors } from "../res/styles"
+import { returnStringByCode } from "../res/strings";
 
 class WelcomePage extends Component {
 

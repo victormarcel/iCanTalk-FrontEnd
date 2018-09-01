@@ -8,7 +8,7 @@ import {
     ScrollView
 } from 'react-native';
 
-import { returnStringByCode } from "../strings";
+import { returnStringByCode } from "../res/strings";
 
 class RegistrationPage extends Component {
 

@@ -1,1 +1,0 @@
-export {default as WelcomePageControler} from './WelcomePageController';
