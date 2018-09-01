@@ -17,6 +17,7 @@ const ptBrStrings = {
     NAME: "Nome",
     EMAIL: "E-Mail",
     PHONE: "Telefone",
+    SEARCH: "Buscar",
 
     WELCOME_TEXT_1: "Está pronto para praticar um novo",
     WELCOME_TEXT_2: "idioma como nunca?",

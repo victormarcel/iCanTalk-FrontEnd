@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
-import RegistrationPage from './pages/RegistrationPage';
-import WelcomePage from './pages/WelcomePage';
+import WelcomePage from './assets/pages/WelcomePage';
+import RegistrationPage from './assets/pages/RegistrationPage';
+import ConversationPage from './assets/pages/ConversationPage';
 
-import { Colors } from "./styles";
+import { Colors } from "./assets/res/styles";
 
 const Router = props => {
 
@@ -22,6 +23,12 @@ const Router = props => {
                 navigationOptions: {
                     title: 'Novo Usuário'
                 }
+            },
+            "ConversationPage": {
+                screen: ConversationPage,
+                navigationOptions: {
+                    title: 'Conversas'
+                }
             }
         },
         {
@@ -37,7 +44,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": props.isRegisteredUser ? "WelcomePage" : "WelcomePage" 
+            "initialRouteName": props.isRegisteredUser ? "ConversationPage" : "WelcomePage" 
         }   
     );
 
