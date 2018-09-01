@@ -8,6 +8,8 @@ import {
     ScrollView
 } from 'react-native';
 
+import { returnStringByCode } from "../strings";
+
 class RegistrationPage extends Component {
 
     teste() {
@@ -17,12 +19,12 @@ class RegistrationPage extends Component {
     render() {
         return (
             <ScrollView style = { styles.container }>
-                <Text style = { styles.label }>Preencha os campos abaixo e comece</Text>
-                <Text style = { [styles.label, styles.lastLabel] }>a praticar um novo idioma agora mesmo!!!</Text>
+                <Text style = { styles.label }>{ returnStringByCode("REGISTER_TEXT_1") }</Text>
+                <Text style = { [styles.label, styles.lastLabel] }>{ returnStringByCode("REGISTER_TEXT_2") }</Text>
 
-                <TextInput style = { styles.input } placeholder = "Nome"/>
-                <TextInput style = { styles.input } placeholder = "Telefone"/>
-                <TextInput style = { [styles.input, styles.lastLabel] } placeholder = "E-Mail"/>
+                <TextInput style = { styles.input } placeholder = { returnStringByCode("NAME") }/>
+                <TextInput style = { styles.input } placeholder = { returnStringByCode("PHONE") }/>
+                <TextInput style = { [styles.input, styles.lastLabel] } placeholder = { returnStringByCode("EMAIL") }/>
 
                 <Button 
                     title = "Salvar"

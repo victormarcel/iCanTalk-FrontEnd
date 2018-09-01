@@ -34,7 +34,7 @@ const Router = props => {
                 },
                 headerTitleStyle: {
                     color: 'white',
-                    fontSize: 25
+                    fontSize: 20
                 }
             },
             "initialRouteName": props.isRegisteredUser ? "WelcomePage" : "WelcomePage" 

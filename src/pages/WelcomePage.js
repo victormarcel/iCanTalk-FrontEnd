@@ -10,6 +10,7 @@ import {
 
 import logo from "../images/logo.png";
 import { Colors } from "../styles"
+import { returnStringByCode } from "../strings";
 
 class WelcomePage extends Component {
 
@@ -33,12 +34,12 @@ class WelcomePage extends Component {
                         />
                     </View> 
     
-                    <Text style = { styles.label }>Está pronto para praticar um novo</Text>
-                    <Text style = { [styles.label, styles.lastLabel] }>idioma como nunca praticou?</Text>
+                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_1") }</Text>
+                    <Text style = { [styles.label, styles.lastLabel] }>{ returnStringByCode("WELCOME_TEXT_2") }</Text>
     
-                    <Text style = { styles.label }>Clique no botão abaixo</Text>
-                    <Text style = { styles.label }>e aproveito a melhor experiência para</Text>
-                    <Text style = { [styles.label, styles.labelBeforeButton] }>estudar um novo idioma!</Text>
+                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_3") }</Text>
+                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_4") }</Text>
+                    <Text style = { [styles.label, styles.labelBeforeButton] }>{ returnStringByCode("WELCOME_TEXT_5") }</Text>
                 </View>
 
                 <Button
