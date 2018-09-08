@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "316273939153",
+    "firebase_url": "https://icantalk-7027a.firebaseio.com",
+    "project_id": "icantalk-7027a",
+    "storage_bucket": "icantalk-7027a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316273939153:android:900ce2c3d78ad31d",
+        "android_client_info": {
+          "package_name": "com.icantalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316273939153-8q9erutdgleh3k4emqtfj7ec3uki1la8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMulsa6VyTPoXR4n6ef916DXsiGb50fmQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
