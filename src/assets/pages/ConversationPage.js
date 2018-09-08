@@ -5,8 +5,10 @@ import {
     Image,
     TouchableOpacity,
     FlatList,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
+import firebase, { RemoteMessage } from 'react-native-firebase';
 
 import SearchInputTop from "../components/SearchInputTop";
 import ConversationItem from "../components/ConversationItem";
@@ -94,7 +96,46 @@ class ConversationPage extends Component {
                 />
             </TouchableOpacity>
         ),
-      };
+    };
+
+    componentDidMount(){
+
+        // Criando ou recuperando um token para um device;
+        firebase.messaging().getToken()
+        .then(fcmToken => {
+            if (fcmToken) {
+                console.log(fcmToken);
+                // Create a RemoteMessage
+
+            } else {
+                console.log("Novo token: " + fcmToken);
+            } 
+        });
+
+        //Pedindo permissão ao usuário para utilizar
+        //o FCM;
+        // firebase.messaging().requestPermission()
+        // .then(teste => {
+        //     console.log("teste123" + teste)
+        // })
+        // .catch(error => {
+        //     // User has rejected permissions  
+        // });
+
+        this.notificationListener = firebase.notifications().onNotification((message) => {
+            console.log(message);
+        });
+
+        this.messagerListener = firebase.messaging().onMessage((message) => {
+            console.log(message);
+        });
+
+    }
+
+    componentWillUnmount() {
+        this.notificationListener();
+        this.messagerListener();
+    }
 
     render() {
         return (
