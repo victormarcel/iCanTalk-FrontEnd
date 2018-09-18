@@ -12,7 +12,7 @@ import { Colors } from "../res/styles/colors";
 const FooterButton = props => {
     return (
         <View style = { styles.button }>
-            <TouchableOpacity onPress = { props.onPress }>
+            <TouchableOpacity onPress = { props.onNavigate }>
                 <View style = { styles.buttonContent }>
                     <Image
                         source = { props.icon }
