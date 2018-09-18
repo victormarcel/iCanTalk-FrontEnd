@@ -101,7 +101,7 @@ class ConversationPage extends Component {
     componentDidMount(){
 
         // Criando ou recuperando um token para um device;
-        firebase.messaging().getToken()
+        /*firebase.messaging().getToken()
         .then(fcmToken => {
             if (fcmToken) {
                 console.log(fcmToken);
@@ -128,14 +128,14 @@ class ConversationPage extends Component {
 
         this.messagerListener = firebase.messaging().onMessage((message) => {
             console.log(message);
-        });
+        });*/
 
     }
 
-    componentWillUnmount() {
+    /*componentWillUnmount() {
         this.notificationListener();
         this.messagerListener();
-    }
+    }*/
 
     render() {
         return (
@@ -153,7 +153,11 @@ class ConversationPage extends Component {
                 </ScrollView>
                 <FooterButtons buttons = { 
                     [
-                        {icon: friendsListIcon, label: returnStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL")},
+                        {
+                            icon: friendsListIcon,
+                            label: returnStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL"),
+                            onNavigate: () => {this.props.navigation.navigate("RelationshipPage")}
+                        },
                         {icon: socialNetworksIcon, label: returnStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL")}
                     ] 
                 }/>

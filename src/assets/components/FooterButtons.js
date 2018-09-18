@@ -22,6 +22,7 @@ const FooterButtons = props => {
                     key = { index }
                     icon = { button.icon }
                     label = { button.label }
+                    onNavigate = { button.onNavigate }
                 />
             )
         });
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: "row",
 
-        position: "absolute",
+        position: "relative",
         bottom: 0,
 
         width: Dimensions.get("window").width,

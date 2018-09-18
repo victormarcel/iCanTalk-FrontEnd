@@ -4,6 +4,8 @@ import { createStackNavigator } from 'react-navigation';
 import WelcomePage from './assets/pages/WelcomePage';
 import RegistrationPage from './assets/pages/RegistrationPage';
 import ConversationPage from './assets/pages/ConversationPage';
+import RelationshipPage from './assets/pages/RelationshipPage';
+import AddFriendsPage from './assets/pages/AddFriendsPage';
 
 import { Colors } from "./assets/res/styles";
 
@@ -28,6 +30,18 @@ const Router = props => {
                 screen: ConversationPage,
                 navigationOptions: {
                     title: 'Conversas'
+                }
+            },
+            "RelationshipPage": {
+                screen: RelationshipPage,
+                navigationOptions: {
+                    title: 'Amigos'
+                }
+            },
+            "AddFriendsPage": {
+                screen: AddFriendsPage,
+                navigationOptions: {
+                    title: 'Adicionar Amigos'
                 }
             }
         },

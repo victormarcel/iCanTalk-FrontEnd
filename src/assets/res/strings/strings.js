@@ -29,6 +29,11 @@ const ptBrStrings = {
     REGISTER_TEXT_2: "a praticar um novo idioma agora mesmo!!!",
 
     CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL: "Novos Amigos",
-    CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos"
+    CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos",
+
+    RELATIONSHIP_LIST_TILE_SOLICITATIONS: "Solicitações",
+    RELATIONSHIP_LIST_TILE_FRIENDS: "Amigos",
+    RELATIONSHIP_LIST_TILE_FRIENDS: "Adicionar Amigos"
+
 
 }
