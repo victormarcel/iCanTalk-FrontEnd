@@ -6,6 +6,7 @@ import RegistrationPage from './assets/pages/RegistrationPage';
 import ConversationPage from './assets/pages/ConversationPage';
 import RelationshipPage from './assets/pages/RelationshipPage';
 import AddFriendsPage from './assets/pages/AddFriendsPage';
+import ChatPage from './assets/pages/ChatPage';
 
 import { Colors } from "./assets/res/styles";
 
@@ -43,6 +44,12 @@ const Router = props => {
                 navigationOptions: {
                     title: 'Adicionar Amigos'
                 }
+            },
+            "ChatPage": {
+                screen: ChatPage,
+                navigationOptions: {
+                    title: 'Nome Amigo'
+                }
             }
         },
         {
@@ -58,7 +65,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": props.isRegisteredUser ? "ConversationPage" : "WelcomePage" 
+            "initialRouteName": props.isRegisteredUser ? "ChatPage" : "WelcomePage" 
         }   
     );
 
