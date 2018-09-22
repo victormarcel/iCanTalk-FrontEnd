@@ -72,7 +72,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": props.isRegisteredUser ? "PreferencesPage" : "WelcomePage" 
+            "initialRouteName": props.isRegisteredUser ? "ConversationPage" : "WelcomePage" 
         }   
     );
 
