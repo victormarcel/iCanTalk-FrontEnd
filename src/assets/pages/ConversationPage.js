@@ -8,13 +8,12 @@ import {
     ScrollView,
     Alert
 } from 'react-native';
-import firebase, { RemoteMessage } from 'react-native-firebase';
 
 import SearchInputTop from "../components/SearchInputTop";
 import ConversationItem from "../components/ConversationItem";
 import FooterButtons from "../components/FooterButtons";
 
-import { returnStringByCode } from "../res/strings";
+import { getStringByCode } from "../res/strings";
 
 import headerOptionsIcon from "../res/images/baseline_more_vert_white_18dp.png";
 import socialNetworksIcon from "../res/images/baseline_public_black_18dp.png";
@@ -98,45 +97,6 @@ class ConversationPage extends Component {
         ),
     };
 
-    componentDidMount(){
-
-        // Criando ou recuperando um token para um device;
-        /*firebase.messaging().getToken()
-        .then(fcmToken => {
-            if (fcmToken) {
-                console.log(fcmToken);
-                // Create a RemoteMessage
-
-            } else {
-                console.log("Novo token: " + fcmToken);
-            } 
-        });
-
-        //Pedindo permissão ao usuário para utilizar
-        //o FCM;
-        // firebase.messaging().requestPermission()
-        // .then(teste => {
-        //     console.log("teste123" + teste)
-        // })
-        // .catch(error => {
-        //     // User has rejected permissions  
-        // });
-
-        this.notificationListener = firebase.notifications().onNotification((message) => {
-            console.log(message);
-        });
-
-        this.messagerListener = firebase.messaging().onMessage((message) => {
-            console.log(message);
-        });*/
-
-    }
-
-    /*componentWillUnmount() {
-        this.notificationListener();
-        this.messagerListener();
-    }*/
-
     render() {
         return (
             <View style = { styles.container }>
@@ -155,10 +115,10 @@ class ConversationPage extends Component {
                     [
                         {
                             icon: friendsListIcon,
-                            label: returnStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL"),
+                            label: getStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL"),
                             onNavigate: () => {this.props.navigation.navigate("RelationshipPage")}
                         },
-                        {icon: socialNetworksIcon, label: returnStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL")}
+                        {icon: socialNetworksIcon, label: getStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL")}
                     ] 
                 }/>
             </View>

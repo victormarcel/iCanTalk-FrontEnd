@@ -1,1 +1,2 @@
-export * from './Util'
+export * from './Util';
+export * from './FirebaseUtil';

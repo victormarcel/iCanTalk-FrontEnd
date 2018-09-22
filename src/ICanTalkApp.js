@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Alert
+    View
 } from "react-native";
 import { connect } from 'react-redux'
 
@@ -19,24 +19,37 @@ YellowBox.ignoreWarnings([
 class ICanTalkApp extends Component{
 
     constructor(props){
+
         super(props);
+
+        this.state = {
+            isRegisteredUser: "",
+            executedIsRegisteredUserPromise: false
+        }
+
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
-        isRegisteredUser().then(value => {
-            this.props.setIsRegisteredUser(value);
+        isRegisteredUser().then(isRegisteredUser => {
+
+            this.props.setIsRegisteredUser(isRegisteredUser);
+            
+            this.setState({
+                executedIsRegisteredUserPromise: true,
+                isRegisteredUser
+            })
+
         });
 
     }
 
     render() {
-
-        const { isRegisteredUser } = this.props;
-
-        return (
-            <Router isRegisteredUser/>
-        );
+        if (this.state.executedIsRegisteredUserPromise) {
+            return (<Router isRegisteredUser = { this.state.isRegisteredUser }/>)
+          } else {
+            return (<View></View>)
+          }
     }
 
 };
@@ -47,7 +60,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
     return {
-        isRegisteredUser: state.isRegisteredUser
+        isRegisteredUser: state.user.isRegisteredUser
     }
 }
 

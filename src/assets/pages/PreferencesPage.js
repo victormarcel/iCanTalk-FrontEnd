@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { Colors } from "../res/styles/colors";
-import { returnStringByCode } from "../res/strings"
+import { getStringByCode } from "../res/strings"
 
 class PreferencesPage extends Component {
 
@@ -34,18 +34,18 @@ class PreferencesPage extends Component {
     render() {
         return (
             <View style = { styles.container }>
-                <Text style = { styles.informations }>{ returnStringByCode("PREFERENCE_INFORMATIONS") }</Text>
-                <Text style = { styles.languageSelectLabel }>{ `${returnStringByCode("PREFERENCE_LANGUAGE_SELECT_TITLE")}:` }</Text>
+                <Text style = { styles.informations }>{ getStringByCode("PREFERENCE_INFORMATIONS") }</Text>
+                <Text style = { styles.languageSelectLabel }>{ `${getStringByCode("PREFERENCE_LANGUAGE_SELECT_TITLE")}:` }</Text>
                 <View style = { styles.pickerView }>
                     <Picker
                         selectedValue = { this.state.selectedLanguage }
                         style = { styles.languagePicker }
                         onValueChange = { itemValue => this.setSelectedLanguage(itemValue) }>
                             <Picker.Item 
-                                label = { returnStringByCode("PREFERENCE_PORTUGUESE_LANGUAGE_OPTION") }
+                                label = { getStringByCode("PREFERENCE_PORTUGUESE_LANGUAGE_OPTION") }
                                 value="js" />
                             <Picker.Item 
-                                label = { returnStringByCode("PREFERENCE_ENGLISH_LANGUAGE_OPTION") } 
+                                label = { getStringByCode("PREFERENCE_ENGLISH_LANGUAGE_OPTION") } 
                                 value="java" />
                     </Picker>
                 </View>

@@ -13,7 +13,7 @@ import SolicitationItem from "../components/SolicitationItem";
 import FriendItem from "../components/FriendItem";
 import FooterButtons from "../components/FooterButtons"
 
-import { returnStringByCode } from "../res/strings";
+import { getStringByCode } from "../res/strings";
 
 import fiendAddIcon from "../res/images/baseline_person_add_black_18dp.png";
 
@@ -68,7 +68,7 @@ class RelashionshipPage extends Component {
                 <SearchInputTop/>
                 <ScrollView>
                     <View>
-                        <ListTitle label = { returnStringByCode("RELATIONSHIP_LIST_TILE_SOLICITATIONS") }/>
+                        <ListTitle label = { getStringByCode("RELATIONSHIP_LIST_TILE_SOLICITATIONS") }/>
                         <FlatList
                             data = { solictationsMock }
                             renderItem = { ({item}) => ( 
@@ -78,7 +78,7 @@ class RelashionshipPage extends Component {
                         />
                     </View>
                     <View>
-                        <ListTitle label = { returnStringByCode("RELATIONSHIP_LIST_TILE_FRIENDS") }/>
+                        <ListTitle label = { getStringByCode("RELATIONSHIP_LIST_TILE_FRIENDS") }/>
                         <ScrollView>
                             <FlatList
                                 data = { friendsMock }
@@ -94,7 +94,7 @@ class RelashionshipPage extends Component {
                     [
                         {
                             icon: fiendAddIcon,
-                            label: returnStringByCode("RELATIONSHIP_LIST_TILE_FRIENDS"),
+                            label: getStringByCode("RELATIONSHIP_LIST_TILE_FRIENDS"),
                             onNavigate: () => { this.props.navigation.navigate("AddFriendsPage") }
                         }
                     ] 
