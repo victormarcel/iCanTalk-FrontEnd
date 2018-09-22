@@ -1,4 +1,4 @@
-export const returnStringByCode = stringCode => {
+export const getStringByCode = stringCode => {
 
     let stringToBeReturned;
 
@@ -18,15 +18,21 @@ const ptBrStrings = {
     EMAIL: "E-Mail",
     PHONE: "Telefone",
     SEARCH: "Buscar",
+    SAVE: "Salvar",
+    ERROR: "Erro",
+    WELCOME: "Bem-Vindo",
 
     WELCOME_TEXT_1: "Está pronto para praticar um novo",
     WELCOME_TEXT_2: "idioma como nunca?",
     WELCOME_TEXT_3: "Clique no botão abaixo",
     WELCOME_TEXT_4: "e aproveite a melhor experiência para",
     WELCOME_TEXT_5: "estudar uma nova língua!",
+    WELCOME_INIT_TEXT: "Seja bem-vindo ao iCanTalk!",
 
     REGISTER_TEXT_1: "Preencha os campos abaixo e comece",
     REGISTER_TEXT_2: "a praticar um novo idioma agora mesmo!!!",
+    REGISTER_TEXT_SAVE_ERROR_1: "Preencha todos os campos do formulário antes de pressionar o botão 'Salvar'.",
+    REGISTER_TEXT_SAVE_ERROR_2: "Não foi possível completar o registro!",
 
     CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL: "Novos Amigos",
     CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos",

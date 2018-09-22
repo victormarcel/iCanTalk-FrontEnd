@@ -10,7 +10,7 @@ import {
 
 import logo from "../res/images/logo.png";
 import { Colors } from "../res/styles"
-import { returnStringByCode } from "../res/strings";
+import { getStringByCode } from "../res/strings";
 
 class WelcomePage extends Component {
 
@@ -34,12 +34,12 @@ class WelcomePage extends Component {
                         />
                     </View> 
     
-                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_1") }</Text>
-                    <Text style = { [styles.label, styles.lastLabel] }>{ returnStringByCode("WELCOME_TEXT_2") }</Text>
+                    <Text style = { styles.label }>{ getStringByCode("WELCOME_TEXT_1") }</Text>
+                    <Text style = { [styles.label, styles.lastLabel] }>{ getStringByCode("WELCOME_TEXT_2") }</Text>
     
-                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_3") }</Text>
-                    <Text style = { styles.label }>{ returnStringByCode("WELCOME_TEXT_4") }</Text>
-                    <Text style = { [styles.label, styles.labelBeforeButton] }>{ returnStringByCode("WELCOME_TEXT_5") }</Text>
+                    <Text style = { styles.label }>{ getStringByCode("WELCOME_TEXT_3") }</Text>
+                    <Text style = { styles.label }>{ getStringByCode("WELCOME_TEXT_4") }</Text>
+                    <Text style = { [styles.label, styles.labelBeforeButton] }>{ getStringByCode("WELCOME_TEXT_5") }</Text>
                 </View>
 
                 <Button

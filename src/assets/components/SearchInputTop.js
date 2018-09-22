@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 
-import { returnStringByCode } from "../res/strings";
+import { getStringByCode } from "../res/strings";
 import { Colors } from "../res/styles/colors";
 
 const SearchInputTop = () => {
     return (
         <View style = { styles.searchView }>
-            <TextInput placeholder = { returnStringByCode("SEARCH") }/>
+            <TextInput placeholder = { getStringByCode("SEARCH") }/>
         </View>
     );
 };
