@@ -38,7 +38,7 @@ const ptBrStrings = {
     PREFERENCE_ENGLISH_LANGUAGE_OPTION: "Inglês",
     PREFERENCE_PORTUGUESE_LANGUAGE_OPTION: "Português",
     PREFERENCE_LANGUAGE_SELECT_TITLE: "Idioma",
-    PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nque elas chegarão."
+    PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão."
 
 
 }
