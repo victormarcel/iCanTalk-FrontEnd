@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getEndPointByCode } from "../res/strings";
-import { getDeviceFcmToken } from "../utils";
+import { getDeviceFcmToken, setItemOnDeviceLocalStorage } from "../utils";
 
 /**
  * 
@@ -22,7 +22,10 @@ export const registerUser = userInfos => {
 
         return axios.post(`${mainEndPoint}${userAddEndPoint}`, requestParameters)
         .then(response => {
+
+            setItemOnDeviceLocalStorage("isRegisteredUser", "Y");
             return response.data.usuarioId;
+
         })
         .catch(error => {
             throw(error);
