@@ -23,61 +23,6 @@ const userMock = [
             "name": "Beto",
             "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
         }
-    },{
-        "id": "1",
-        "user": {
-            "name": "Bedin",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "2",
-        "user": {
-            "name": "Beto",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "1",
-        "user": {
-            "name": "Bedin",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "2",
-        "user": {
-            "name": "Beto",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "1",
-        "user": {
-            "name": "Bedin",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "2",
-        "user": {
-            "name": "Beto",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "1",
-        "user": {
-            "name": "Bedin",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
-    },
-    {
-        "id": "2",
-        "user": {
-            "name": "Beto",
-            "pictureUrl": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png"
-        }
     }
 ]
 
