@@ -14,22 +14,21 @@ import addIcon from "../res/images/baseline_add_circle_outline_black_18dp.png";
 
 const FriendToAddItem = (props) => {
 
-    const { users } = props;
-    const { user } = users;
+    const { user } = props;
 
     return (        
         <View style = { styles.row }>
             <View style = { styles.avatarView }>
                 <Image 
                     style = { styles.avatar }
-                    source = {{ uri: user.pictureUrl }}
+                    source = {{ uri: user.URL_IMAGEM_PERFIL }}
                 />
             </View>
             <View style = { styles.userNameView }>
-                <Text style = { styles.userName }>{ user.name }</Text>
+                <Text style = { styles.userName }>{ user.NOME }</Text>
             </View>
             <View style = { styles.actions }>
-                <TouchableOpacity>
+                <TouchableOpacity onPress = { () => props.addActionClick(user) }>
                     <Image
                         source = { addIcon }
                     />

@@ -5,14 +5,16 @@ import {
     Image,
     TouchableOpacity,
     FlatList,
-    ScrollView,
-    Alert
+    ScrollView
 } from 'react-native';
+import { connect } from "react-redux";
 
 import SearchInputTop from "../components/SearchInputTop";
 import ConversationItem from "../components/ConversationItem";
 import FooterButtons from "../components/FooterButtons";
 
+import { getUserinfosOnDeviceLocalStorage } from "../utils";
+import { setUserInfos } from "../../redux/actions";
 import { getStringByCode } from "../res/strings";
 
 import headerOptionsIcon from "../res/images/baseline_more_vert_white_18dp.png";
@@ -97,6 +99,21 @@ class ConversationPage extends Component {
         ),
     };
 
+    componentDidMount() {
+
+        if(this.props.userInfos.name === ""){
+
+            getUserinfosOnDeviceLocalStorage().then(userInfos => {
+
+                let userInfosAsJson = JSON.parse(userInfos);
+                this.props.setUserInfos(userInfosAsJson);
+                
+            })
+
+        }
+
+    }
+
     render() {
         return (
             <View style = { styles.container }>
@@ -138,4 +155,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ConversationPage;
+const mapDispatchToProps = {
+    setUserInfos
+}
+
+const mapStateToProps = state => {
+    return {
+        userInfos: state.userInfos
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConversationPage);
+

@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { getEndPointByCode } from "../res/strings";
-import { getDeviceFcmToken, setItemOnDeviceLocalStorage } from "../utils";
+import { 
+    getDeviceFcmToken,
+    setItemOnDeviceLocalStorage,
+    bindFormData
+} from "../utils";
+
+const defaultUserImage = "https://centrik.in/wp-content/uploads/2017/02/user-image-.png";
 
 /**
  * 
@@ -23,8 +29,13 @@ export const registerUser = userInfos => {
         return axios.post(`${mainEndPoint}${userAddEndPoint}`, requestParameters)
         .then(response => {
 
+            const userId = response.data.usuarioId;
+            userInfos.id = userId;
+
             setItemOnDeviceLocalStorage("isRegisteredUser", "Y");
-            return response.data.usuarioId;
+            setItemOnDeviceLocalStorage("userInfos", JSON.stringify(userInfos));
+
+            return userId;
 
         })
         .catch(error => {
@@ -50,31 +61,10 @@ const buildRegisterUserParameters = userInfos => {
         NOME: userInfos.name,
         TELEFONE: userInfos.phone,
         EMAIL: userInfos.email,
+        URL_IMAGEM_PERFIL: defaultUserImage,
         FCM_TOKEN: userInfos.fcmToken
     }
 
     return bindFormData(parameters);
-
-}
-
-/**
- * Retorna um "formData" a partir dos valores
- * recebidos como parâmetro.
- * 
- * @param {object} data - Valores para criar
- * o formData 
- * 
- * @returns - formData com os valores
- * recebidos como parâmetro.
- */
-const bindFormData = data => {
-
-    const formData = new FormData();
-
-    for (var key in data) {
-        formData.append(key, data[key]);
-    }
-
-    return formData;
 
 }

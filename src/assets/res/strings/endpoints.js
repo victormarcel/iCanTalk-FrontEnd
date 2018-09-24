@@ -5,7 +5,8 @@ export const getEndPointByCode = endPointCode => {
 const endPoints = {
 
     MAIN_APP: "https://icantalk.herokuapp.com/",
-
-    USER_ADD: "usuario/add"
+    USER_ADD: "usuario/add",
+    LIST_USERS_TO_ADD: "usuario/listasemrelacionamento",
+    NEW_SOLICITATION: "relacionamento/novasolicitacao"
 
 }

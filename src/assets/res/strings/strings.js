@@ -21,6 +21,12 @@ const ptBrStrings = {
     SAVE: "Salvar",
     ERROR: "Erro",
     WELCOME: "Bem-Vindo",
+    SOLICITATION: "Solicitação",
+    SOLICITATIONS: "Solicitações",
+    YES: "Sim",
+    NO: "Não",
+    FRIENDS: "Amigos",
+    SUCCESS: "Sucesso",
 
     WELCOME_TEXT_1: "Está pronto para praticar um novo",
     WELCOME_TEXT_2: "idioma como nunca?",
@@ -37,14 +43,18 @@ const ptBrStrings = {
     CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL: "Novos Amigos",
     CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos",
 
-    RELATIONSHIP_LIST_TILE_SOLICITATIONS: "Solicitações",
-    RELATIONSHIP_LIST_TILE_FRIENDS: "Amigos",
     RELATIONSHIP_LIST_TILE_FRIENDS: "Adicionar Amigos",
 
     PREFERENCE_ENGLISH_LANGUAGE_OPTION: "Inglês",
     PREFERENCE_PORTUGUESE_LANGUAGE_OPTION: "Português",
     PREFERENCE_LANGUAGE_SELECT_TITLE: "Idioma",
-    PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão."
+    PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão.",
+
+    ADD_FRIENDS_ANY_SEARCHED_USERS: "Nenhum usuário encontrado!",
+    SEND_SOLICITATION_QUESTION: function(userName){
+        return `Deseja enviar uma solicitação para ${ userName } ?`
+    },
+    SEND_SOLICITATION_SUCCESS: "Solicitação enviada com sucesso!"
 
 
 }
