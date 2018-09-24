@@ -60,7 +60,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
     return {
-        isRegisteredUser: state.user.isRegisteredUser
+        isRegisteredUser: state.userInfos.isRegisteredUser
     }
 }
 

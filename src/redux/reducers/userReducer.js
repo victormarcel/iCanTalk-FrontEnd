@@ -24,6 +24,7 @@ function userReducer(state = INITIAL_STATE, action) {
         case SET_USER_INFOS:
 
             newState = { ...state };
+            newState.id = action.userInfos.id ? action.userInfos.id : "";
             newState.name = action.userInfos.name ? action.userInfos.name : "";
             newState.phone = action.userInfos.phone ? action.userInfos.phone : "";
             newState.email = action.userInfos.email ? action.userInfos.email : "";

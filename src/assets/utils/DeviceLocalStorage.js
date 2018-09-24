@@ -8,9 +8,7 @@ import { AsyncStorage } from "react-native";
  * a ser criada no armazenamento interno do celular.
  */
 export const setItemOnDeviceLocalStorage = (itemName, value) => {
-
     AsyncStorage.setItem(itemName, value);
-
 }
 
 /**
@@ -19,9 +17,7 @@ export const setItemOnDeviceLocalStorage = (itemName, value) => {
  * do armazenamento interno do celular.
  */
 export const getItemOnDeviceLocalStorage = itemName => {
-    
     return AsyncStorage.getItem(itemName);
-
 }
 
 /**
@@ -30,7 +26,5 @@ export const getItemOnDeviceLocalStorage = itemName => {
  * do armazenamento interno do celular.
  */
 export const removeItemOnDeviceLocalStorage = itemName => {
-    
     return AsyncStorage.removeItem(itemName);
-
 }

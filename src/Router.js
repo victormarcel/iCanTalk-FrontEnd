@@ -13,6 +13,8 @@ import { Colors } from "./assets/res/styles";
 
 const Router = props => {
 
+    const isRegisteredUser = props.isRegisteredUser;
+
     const StackNavigator = createStackNavigator(
         {   
             "WelcomePage": {
@@ -72,7 +74,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": props.isRegisteredUser ? "ConversationPage" : "WelcomePage" 
+            "initialRouteName": isRegisteredUser ? "ConversationPage" : "WelcomePage" 
         }   
     );
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { 
-    View,
     Text,
     StyleSheet,
     TextInput,
     Button,
     ScrollView,
-    Alert
+    Alert,
+    ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux'
 
@@ -24,7 +24,8 @@ class RegistrationPage extends Component {
         this.state = {
             nameInput: "",
             phoneInput: "",
-            mailInput: ""
+            mailInput: "",
+            doingRequest: false
         }
 
     }
@@ -45,9 +46,13 @@ class RegistrationPage extends Component {
 
         if(this.isFilledRegistrationForm()){
 
+            this.setState({doingRequest: true});
+
             const userInfos = this.createUserInfosObject();
             registerUser(userInfos)
             .then(userId => {
+
+                this.setState({doingRequest: false});
 
                 userInfos.id = userId;
 
@@ -57,6 +62,8 @@ class RegistrationPage extends Component {
 
             })
             .catch(error => {
+
+                this.setState({doingRequest: false});
 
                 Alert.alert(getStringByCode("ERROR"), getStringByCode("REGISTER_TEXT_SAVE_ERROR_2"));
                 console.log(error);
@@ -95,6 +102,24 @@ class RegistrationPage extends Component {
 
     }
 
+    handlerButton() {
+
+        const { doingRequest } = this.state;
+
+        if(doingRequest){
+            return (<ActivityIndicator size = "large" color = { Colors.appDefaultColor }/>);
+        } else {
+
+            return (<Button 
+                title = { getStringByCode("SAVE") }
+                color = { Colors.appDefaultColor }
+                onPress = { () => this.onClickSaveButton() }
+            />)
+
+        } 
+
+    }
+
     render() {
         return (
             <ScrollView style = { styles.container }>
@@ -120,13 +145,9 @@ class RegistrationPage extends Component {
                     placeholder = { getStringByCode("EMAIL") }
                     value = { this.state.mailInput }
                     onChangeText = { value => this.onChangeHandler("mailInput", value) }/>
-
-                <Button 
-                    title = { getStringByCode("SAVE") }
-                    color = { Colors.appDefaultColor }
-                    onPress = { () => this.onClickSaveButton() }
-                />
+                { this.handlerButton() }
             </ScrollView>
+
         );
     }
 }

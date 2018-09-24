@@ -68,7 +68,7 @@ class RelashionshipPage extends Component {
                 <SearchInputTop/>
                 <ScrollView>
                     <View>
-                        <ListTitle label = { getStringByCode("RELATIONSHIP_LIST_TILE_SOLICITATIONS") }/>
+                        <ListTitle label = { getStringByCode("SOLICITATIONS") }/>
                         <FlatList
                             data = { solictationsMock }
                             renderItem = { ({item}) => ( 
@@ -78,7 +78,7 @@ class RelashionshipPage extends Component {
                         />
                     </View>
                     <View>
-                        <ListTitle label = { getStringByCode("RELATIONSHIP_LIST_TILE_FRIENDS") }/>
+                        <ListTitle label = { getStringByCode("FRIENDS") }/>
                         <ScrollView>
                             <FlatList
                                 data = { friendsMock }
