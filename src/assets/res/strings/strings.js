@@ -44,6 +44,9 @@ const ptBrStrings = {
     CONVERSATION_FRIENDS_BUTTON_LABEL: "Amigos",
 
     RELATIONSHIP_LIST_TILE_FRIENDS: "Adicionar Amigos",
+    RELATIONSHIP_SOLICITATION_ACCEPTED: "Solicitação aceita com sucesso!",
+    RELATIONSHIP_SOLICITATION_RECUSE: "Deseja recusar esta solicitação?",
+    RELATIONSHIP_SOLICITATION_RECUSED: "Solicitação recusada!",
 
     PREFERENCE_ENGLISH_LANGUAGE_OPTION: "Inglês",
     PREFERENCE_PORTUGUESE_LANGUAGE_OPTION: "Português",

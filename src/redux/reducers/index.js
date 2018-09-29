@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
 import userReducer from "./userReducer";
-import searchInputTopReducer from "./searchInputTopReducer";
 
 const rootReducer = combineReducers({
-    userInfos: userReducer,
-    searchInputTopValue: searchInputTopReducer
+    userInfos: userReducer
 })
 
 export default rootReducer;

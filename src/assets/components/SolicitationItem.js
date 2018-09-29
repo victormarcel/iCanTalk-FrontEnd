@@ -16,27 +16,26 @@ import recuse from "../res/images/baseline_highlight_off_black_18dp.png";
 const SolicitationItem = (props) => {
 
     const { solicitation } = props;
-    const { user } = solicitation;
 
     return (        
         <View style = { styles.row }>
             <View style = { styles.avatarView }>
                 <Image 
                     style = { styles.avatar }
-                    source = {{ uri: user.pictureUrl }}
+                    source = {{ uri: solicitation.URL_IMAGEM_PERFIL_USUARIO_SOLICITANTE }}
                 />
             </View>
             <View style = { styles.userNameView }>
-                <Text style = { styles.userName }>{ user.name }</Text>
+                <Text style = { styles.userName }>{ solicitation.NOME_USUARIO_SOLICITANTE }</Text>
             </View>
             <View style = { styles.actions }>
-                <TouchableOpacity>
+                <TouchableOpacity onPress = { props.acceptButtonOnClick }>
                     <Image
                         style = { styles.actionAccept }
                         source = { accept }
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress = { props.recuseButtonOnClick }>
                     <Image 
                         source = { recuse }
                     />
