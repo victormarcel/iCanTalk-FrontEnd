@@ -21,10 +21,23 @@ export const getItemOnDeviceLocalStorage = itemName => {
 }
 
 /**
+ * Remove um item item do armazenamento interno do telefone
+ * pelo nome recebido como parâmetro.
  * 
  * @param {string} itemName - Nome do item a ser removido
  * do armazenamento interno do celular.
  */
 export const removeItemOnDeviceLocalStorage = itemName => {
     return AsyncStorage.removeItem(itemName);
+}
+
+/**
+ * Concatena um valor recebido a um item no armazenamento
+ * interno do celular.
+ * 
+ * @param {string} itemName - Nome do item a ser concatenado.
+ * @param {stirng} value - Valor a ser concatenado.
+ */
+export const mergeItemOnDeviceLocalStorage = (itemName, value) => {
+    return AsyncStorage.mergeItem(itemName, value);
 }

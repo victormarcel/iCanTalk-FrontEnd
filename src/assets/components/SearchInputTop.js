@@ -4,32 +4,38 @@ import {
     TextInput,
     StyleSheet 
 } from 'react-native';
-import { connect } from "react-redux"
 
-import { setSearchInputValue } from "../../redux/actions";
 import { getStringByCode } from "../res/strings";
 import { Colors } from "../res/styles/colors";
 
 class SearchInputTop extends Component {
 
     constructor(props) {
+        
         super(props);
+        this.state = {
+            inputedText: ""
+        }
     }
 
-    //TODO MUDAR
-    componentDidMount() {
-        this.props.setSearchInputValue("");
+    onChangeHandler(field, value) {
+
+        this.setState({
+            [field]: value
+        })
+
     }
 
     render(){
 
         return (
             <View style = { styles.searchView }>
-                <TextInput 
+                <TextInput
+                    value = { this.state.inputedText }
                     placeholder = { getStringByCode("SEARCH") }
                     returnKeyType = 'search'
-                    onChangeText = { value => this.props.setSearchInputValue(value) }
-                    onSubmitEditing = { () => this.props.onSubmitEditing(this.props.searchInputTopValue) }/>
+                    onChangeText = { value => this.onChangeHandler("inputedText", value) }
+                    onSubmitEditing = { () => this.props.onSubmitEditing(this.state.inputedText) }/>
             </View>
         );
 
@@ -44,14 +50,4 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapDispatchToProps = {
-    setSearchInputValue
-}
-
-const mapStateToProps = state => {
-    return {
-        searchInputTopValue: state.searchInputTopValue
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchInputTop);
+export default SearchInputTop;

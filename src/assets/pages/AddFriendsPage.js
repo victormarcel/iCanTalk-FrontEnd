@@ -33,14 +33,13 @@ class AddFriendsPage extends Component {
 
     }
 
-    searchUsersByInputedInfo(){
+    searchUsersByInputedInfo(searchedValues){
 
-        const { searchInputTopValue } = this.props;
         const { id } = this.props.userInfos;
 
         this.setState({isSearching: true});
 
-        getUserListBySomeInfo(id, searchInputTopValue).then(users => {
+        getUserListBySomeInfo(id, searchedValues).then(users => {
 
             let searchedUsers = users.data.usuarios;
             this.setState({isSearching: false});
@@ -73,7 +72,7 @@ class AddFriendsPage extends Component {
                                 getStringByCode("SUCCESS"),
                                 getStringByCode("SEND_SOLICITATION_SUCCESS")
                             );
-                            this.searchUsersByInputedInfo();
+                            this.removeUserToSendSolicitation(selectedUser.ID);
 
                         })
                         .catch(error => {
@@ -87,7 +86,24 @@ class AddFriendsPage extends Component {
                 }
             ],
             { cancelable: true }
-          )
+        )
+
+    }
+
+    removeUserToSendSolicitation(userId){
+
+        var users = this.state.searchedUsers;
+
+        users.forEach((user, i) => {
+
+            if(user.ID === userId){
+                users.splice(i, 1);
+                return;
+            }
+
+        });
+
+        this.setState({searchedUsers: users});
 
     }
 

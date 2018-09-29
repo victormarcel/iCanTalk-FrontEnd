@@ -21,7 +21,7 @@ export const getUserListBySomeInfo = (userId, info) => {
             ID_USUARIO: userId,
             INFORMACAO_USUARIO: info
         }
-    })
+    });
 
 }
 
@@ -39,7 +39,7 @@ export const createSolicitation = (primaryUserId, secondaryUserId) => {
         
     let parameters = {
         primaryUserId,
-		secondaryUserId
+        secondaryUserId
     };
 
     requestParameters = buildParametersToCreateSolicitation(parameters);
@@ -59,7 +59,8 @@ const buildParametersToCreateSolicitation = data => {
 
     let parameters = {
         ID_USUARIO_PRIMARIO: data.primaryUserId,
-		ID_USUARIO_SECUNDARIO: data.secondaryUserId
+        ID_USUARIO_SECUNDARIO: data.secondaryUserId,
+        ID_STATUS_RELACIONAMENTO: 1
     };
 
     return bindFormData(parameters);

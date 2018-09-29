@@ -12,20 +12,23 @@ import { Colors } from "../res/styles/colors";
 const FriendItem = (props) => {
 
     const { friend } = props;
-    const { user } = friend;
 
     //TODO recalcular pelo tamanho da tela
     const handlerDescription = description => {
 
         let descriptionToBeReturned;
 
-        if(description.length > 30){
-            descriptionToBeReturned = `${description.substring(0, 30)}...`;
-        } else {
-            descriptionToBeReturned = description
-        }
+        if(description){
 
-        return descriptionToBeReturned;
+            if(description.length > 30){
+                descriptionToBeReturned = `${description.substring(0, 30)}...`;
+            } else {
+                descriptionToBeReturned = description
+            }
+    
+            return descriptionToBeReturned;
+
+        }
 
     }
 
@@ -34,15 +37,15 @@ const FriendItem = (props) => {
             <View style = { styles.avatarView }>
                 <Image 
                     style = { styles.avatar }
-                    source = {{ uri: user.pictureUrl }}
+                    source = {{ uri: friend.URL_IMAGEM_PERFIL_USUARIO_AMIGO }}
                 />
             </View>
             <View style = { styles.friendInfos }>
                 <Text style = { styles.friendName }>
-                    { user.name }
+                    { friend.NOME_USUARIO_AMIGO }
                 </Text>
                 <Text>
-                    { handlerDescription(user.description) }
+                    { handlerDescription(friend.DESCRICAO_USUARIO_AMIGO) }
                 </Text>
             </View>
         </View>
