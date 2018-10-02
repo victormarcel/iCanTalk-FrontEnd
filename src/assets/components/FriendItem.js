@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    Dimensions
+    Dimensions,
+    TouchableNativeFeedback
 } from 'react-native';
 
 import { Colors } from "../res/styles/colors";
@@ -33,22 +34,24 @@ const FriendItem = (props) => {
     }
 
     return (        
-        <View style = { styles.row }>
-            <View style = { styles.avatarView }>
-                <Image 
-                    style = { styles.avatar }
-                    source = {{ uri: friend.URL_IMAGEM_PERFIL_USUARIO_AMIGO }}
-                />
+        <TouchableNativeFeedback onPress = { props.openChat }>
+            <View style = { styles.row }>
+                <View style = { styles.avatarView }>
+                    <Image 
+                        style = { styles.avatar }
+                        source = {{ uri: friend.URL_IMAGEM_PERFIL_USUARIO_AMIGO }}
+                    />
+                </View>
+                <View style = { styles.friendInfos }>
+                    <Text style = { styles.friendName }>
+                        { friend.NOME_USUARIO_AMIGO }
+                    </Text>
+                    <Text>
+                        { handlerDescription(friend.DESCRICAO_USUARIO_AMIGO) }
+                    </Text>
+                </View>
             </View>
-            <View style = { styles.friendInfos }>
-                <Text style = { styles.friendName }>
-                    { friend.NOME_USUARIO_AMIGO }
-                </Text>
-                <Text>
-                    { handlerDescription(friend.DESCRICAO_USUARIO_AMIGO) }
-                </Text>
-            </View>
-        </View>
+        </TouchableNativeFeedback>
     );
 };
 

@@ -9,7 +9,7 @@ import { Colors } from "../res/styles/colors";
 
 const Message = props => {
 
-    const { isMyMessage, messageText } = props;
+    const { isMyMessage, messageText, messageHour } = props;
 
     return (
         <View style = { [styles.container, isMyMessage ? styles.receivedMessageBoxPosition : null] }>
@@ -22,7 +22,7 @@ const Message = props => {
                     ] 
                 }>
                 <Text style = { styles.messageText }>{ messageText }</Text>
-                <Text style = { styles.messageHour }>09:00</Text>
+                <Text style = { styles.messageHour }>{ messageHour }</Text>
             </View>
         </View>
     );

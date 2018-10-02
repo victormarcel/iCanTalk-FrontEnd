@@ -50,8 +50,13 @@ const Router = props => {
             },
             "ChatPage": {
                 screen: ChatPage,
-                navigationOptions: {
-                    title: 'Nome Amigo'
+                navigationOptions: ({ navigation }) => {
+                    const userName = navigation.state.params.userName;
+                    return (
+                        {
+                            title: userName
+                        }
+                    )
                 }
             },
             "PreferencesPage": {

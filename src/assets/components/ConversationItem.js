@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    Dimensions
+    Dimensions,
+    TouchableNativeFeedback
 } from 'react-native';
 
 import { Colors } from "../res/styles/colors";
@@ -29,25 +30,27 @@ const ConversationItem = (props) => {
     }
 
     return (        
-        <View style = { styles.row }>
-            <View style = { styles.avatarView }>
-                <Image 
-                    style = { styles.avatar }
-                    source = {{ uri: conversation.user.pictureUrl }}
-                />
-            </View>
-            <View style = { styles.conversationInfos }>
-                <Text style = { styles.conversationName }>
-                    { conversation.user.name }
+        <TouchableNativeFeedback onPress = { props.onNavigate }>
+            <View style = { styles.row }>
+                <View style = { styles.avatarView }>
+                    <Image 
+                        style = { styles.avatar }
+                        source = {{ uri: conversation.PICTURY_URL }}
+                    />
+                </View>
+                <View style = { styles.conversationInfos }>
+                    <Text style = { styles.conversationName }>
+                        { conversation.NAME }
+                    </Text>
+                    <Text>
+                        { handlerLastMessage(conversation.LAST_MESSAGE) }
+                    </Text>
+                </View>
+                <Text style = { styles.lastMessageHour }>
+                    { conversation.LAST_MESSAGE_HOUR }
                 </Text>
-                <Text>
-                    { handlerLastMessage(conversation.lastMessage) }
-                </Text>
             </View>
-            <Text style = { styles.lastMessageHour }>
-                { conversation.lastMessageHour }
-            </Text>
-        </View>
+        </TouchableNativeFeedback>
     );
 };
 

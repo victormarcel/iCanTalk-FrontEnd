@@ -50,8 +50,7 @@ class AddFriendsPage extends Component {
                 this.setState({searchedUsers: users.data.usuarios});
             }
 
-        })
-
+        });
     }
 
     sendSolicitation(selectedUser){

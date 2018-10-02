@@ -15,6 +15,10 @@ import FriendItem from "../components/FriendItem";
 import FooterButtons from "../components/FooterButtons"
 
 import { getStringByCode } from "../res/strings";
+import {
+    setConversations,
+    setCurrentConversation
+} from "../../redux/actions";
 import { 
     getSolicitationsByUser,
     getFriendsByUser,
@@ -25,6 +29,9 @@ import {
     getItemOnDeviceLocalStorage,
     setItemOnDeviceLocalStorage
  } from "../utils/DeviceLocalStorage";
+ import {
+    getConversationByUserId
+ } from "../utils";
 
 import fiendAddIcon from "../res/images/baseline_person_add_black_18dp.png";
 
@@ -238,6 +245,28 @@ class RelashionshipPage extends Component {
 
     }
 
+    openChat(friend) {
+        
+        const friendId = friend.ID_USUARIO_AMIGO;
+        const conversation = getConversationByUserId(friendId);
+        
+        if(conversation){
+            this.props.setCurrentConversation(conversation);
+        } else {
+            this.props.setCurrentConversation(
+                {
+                    SECONDARY_USER_ID: friendId,
+                    NAME: friend.NOME_USUARIO_AMIGO,
+                    PICTURY_URL: friend.URL_IMAGEM_PERFIL_USUARIO_AMIGO,
+                    FCM_TOKEN: friend.FCM_TOKEN_USUARIO_AMIGO
+                }
+            );
+        }
+
+        this.props.navigation.navigate("ChatPage", {userName: friend.NOME_USUARIO_AMIGO});
+
+    }
+
     render() {
 
         const { searchedFriends } = this.state;
@@ -253,7 +282,9 @@ class RelashionshipPage extends Component {
                             <FlatList
                                 data = { searchedFriends }
                                 renderItem = { ({item}) => ( 
-                                    <FriendItem friend = { item }/>
+                                    <FriendItem 
+                                        friend = { item }
+                                        openChat = { () => this.openChat(item) }/>
                                 )}
                                 keyExtractor = { item => item.ID_RELACIONAMENTO.toString() }
                             />
@@ -282,11 +313,16 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapDispatchToProps = {
+    setConversations,
+    setCurrentConversation
+}
+
 const mapStateToProps = state => {
     return {
         userInfos: state.userInfos
     }
 }
 
-export default connect(mapStateToProps, null)(RelashionshipPage);;
+export default connect(mapStateToProps, mapDispatchToProps)(RelashionshipPage);;
 

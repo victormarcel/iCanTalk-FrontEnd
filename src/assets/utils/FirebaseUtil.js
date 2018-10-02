@@ -1,5 +1,11 @@
-import {Alert} from "react-native";
+import {
+    Alert
+} from "react-native";
 import firebase from 'react-native-firebase';
+
+import {
+    relateMessageToChat
+} from "../utils";
 
 export const getDeviceFcmToken = () => {
 
@@ -22,6 +28,26 @@ export const getDeviceFcmToken = () => {
         });
 
 }
+
+export const fcmOnMessage = firebase.messaging().onMessage((message) => {
+    
+    const messageInfos = message.data;
+
+    if(message.data.type === "chat_message"){
+
+        const receiver = {
+            secondaryUserId: messageInfos.senderId,
+            secondaryUserName: messageInfos.senderName,
+            secondaryUserFcmToken: messageInfos.senderFcmToken,
+            secondaryUserPicturyUrl: messageInfos.senderPicturyUrl,
+            isMyMessage: false
+        }
+
+        relateMessageToChat(receiver, messageInfos.message);
+
+    }
+
+});
 
 // Criando ou recuperando um token para um device;
         /*firebase.messaging().getToken()
