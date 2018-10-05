@@ -205,6 +205,7 @@ class RelashionshipPage extends Component {
         var newFriend = [
             {
                 ID_RELACIONAMENTO: solicitation.ID_RELACIONAMENTO,
+                ID_USUARIO_AMIGO: solicitation.ID_USUARIO_PRIMARIO,
                 NOME_USUARIO_AMIGO: solicitation.NOME_USUARIO_SOLICITANTE,
                 EMAIL_USUARIO_AMIGO: solicitation.EMAIL_USUARIO_SOLICITANTE,
                 TELEFONE_USUARIO_AMIGO: solicitation.TELEFONE_USUARIO_SOLICITANTE,

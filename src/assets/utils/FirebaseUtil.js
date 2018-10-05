@@ -31,19 +31,19 @@ export const getDeviceFcmToken = () => {
 
 export const fcmOnMessage = firebase.messaging().onMessage((message) => {
     
-    const messageInfos = message.data;
+    const receivedMessageInfos = message.data;
 
     if(message.data.type === "chat_message"){
 
-        const receiver = {
-            secondaryUserId: messageInfos.senderId,
-            secondaryUserName: messageInfos.senderName,
-            secondaryUserFcmToken: messageInfos.senderFcmToken,
-            secondaryUserPicturyUrl: messageInfos.senderPicturyUrl,
+        const messageInfos = {
+            secondaryUserId: receivedMessageInfos.senderId,
+            secondaryUserName: receivedMessageInfos.senderName,
+            secondaryUserFcmToken: receivedMessageInfos.senderFcmToken,
+            secondaryUserPicturyUrl: receivedMessageInfos.senderPicturyUrl,
             isMyMessage: false
         }
 
-        relateMessageToChat(receiver, messageInfos.message);
+        relateMessageToChat(messageInfos, receivedMessageInfos.message);
 
     }
 

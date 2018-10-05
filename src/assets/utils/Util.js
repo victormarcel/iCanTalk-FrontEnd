@@ -3,12 +3,14 @@ import moment from 'moment';
 import { 
     getItemOnDeviceLocalStorage,
     setItemOnDeviceLocalStorage
+    
  } from "./DeviceLocalStorage";
 import { store } from "../../../store";
 import { 
     setConversations,
     setCurrentConversation,
-    updateConversation
+    updateConversation,
+    pushMessageToCurrentConversation
  } from "../../redux/actions";
  import { 
     sendMessageByFcmToken
@@ -90,7 +92,7 @@ export const relateMessageToChat = (messageInfos, message) => {
         createConversation(messageInfos, messageInfos.isMyMessage);
 
     } else {
-        pushToConversationSendedMessage(searchedConversation, message);
+        pushToConversationSendedMessage(searchedConversation, message, messageInfos.isMyMessage);
     }
 
 }
@@ -98,8 +100,10 @@ export const relateMessageToChat = (messageInfos, message) => {
 export const createConversation = (messageInfos, isMyFirstMessage) => {
     
     const conversation = createConversationObject(messageInfos, isMyFirstMessage);
+
     setCurrentConversationOnRedux(conversation);
     pushConversationOnRedux(conversation);
+    saveConversationOnDeviceStorage(conversation);
 
 }
 
@@ -139,14 +143,15 @@ export const setCurrentConversationOnRedux = conversation => {
     store.dispatch(setCurrentConversation(conversation));
 }
 
-export const pushToConversationSendedMessage = (conversation, message) => {
+export const pushToConversationSendedMessage = (conversation, message, isMyMssage) => {
 
-    const buildedMessage = buildMessage(message, true);
-    conversation.MESSAGES.push(buildedMessage);
+    const buildedMessage = buildMessage(message, isMyMssage);
     conversation.LAST_MESSAGE = message;
-    conversation.LAST_MESSAGE_HOUR = moment().format("HH:mm")
+    conversation.LAST_MESSAGE_HOUR = moment().format("HH:mm");
 
+    updateCurrentConversation(buildedMessage);
     updateConversationOnRedux(conversation);
+    pushMessageToSavedConversation(conversation, buildedMessage);
 
 }
 
@@ -154,8 +159,51 @@ export const updateConversationOnRedux = conversation => {
     store.dispatch(updateConversation(conversation));
 }
 
-// export const saveConversationOnDeviceStorage = conversation => {
+export const updateCurrentConversation = message => {
+    store.dispatch(pushMessageToCurrentConversation(message));
+}
 
-//     var conversations = getItemOnDeviceLocalStorage("conversations");
+export const saveConversationOnDeviceStorage = conversation => {
 
-// }
+    getItemOnDeviceLocalStorage("conversations").then(conversations => {
+
+        let conversationsAsJson;
+
+        if(conversations){
+
+            conversationsAsJson = JSON.parse(conversations);
+            conversationsAsJson.push(conversation);
+            
+        } else {
+            conversationsAsJson = [conversation];
+        }
+
+        setItemOnDeviceLocalStorage("conversations", JSON.stringify(conversationsAsJson));
+
+    });
+
+}
+
+export const pushMessageToSavedConversation = (receivedConversation, message) => {
+
+    getItemOnDeviceLocalStorage("conversations").then(conversations => {
+
+        let conversationsAsJson = JSON.parse(conversations);
+
+        conversationsAsJson.forEach(conversation => {
+
+            if(conversation.SECONDARY_USER_ID === receivedConversation.SECONDARY_USER_ID){
+
+                conversation.LAST_MESSAGE = receivedConversation.LAST_MESSAGE;
+                conversation.LAST_MESSAGE_HOUR = receivedConversation.LAST_MESSAGE_HOUR;
+                conversation.MESSAGES.push(message);
+
+            }
+
+        });
+
+        setItemOnDeviceLocalStorage("conversations", JSON.stringify(conversationsAsJson));
+
+    });
+
+}

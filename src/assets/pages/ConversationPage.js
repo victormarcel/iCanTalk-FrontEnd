@@ -16,7 +16,7 @@ import FooterButtons from "../components/FooterButtons";
 import { 
     getUserinfosOnDeviceLocalStorage,
     fcmOnMessage,
-    setItemOnDeviceLocalStorage,
+    removeItemOnDeviceLocalStorage,
     getItemOnDeviceLocalStorage
 } from "../utils";
 import { 
@@ -31,26 +31,6 @@ import socialNetworksIcon from "../res/images/baseline_public_black_18dp.png";
 import friendsListIcon from "../res/images/round_view_list_black_18dp.png";
 
 const conversationsMock = [
-    {
-        "SECONDARY_USER_ID": "1",
-        "NAME": "Rafaelle",
-        "PICTURY_URL": "https://centrik.in/wp-content/uploads/2017/02/user-image-.png",
-        "FCM_TOKEN": "TESTE",
-        "LAST_MESSAGE": "Até Mais",
-        "LAST_MESSAGE_HOUR": "09:00",
-        "MESSAGES": [
-            {
-                "messageText": "Oi, bom meu camarada?",
-                "messageHour": "12:50",
-                "isMyMessage": true
-            },
-            {
-                "messageText": "Sim, e você?",
-                "messageHour": "12:52",
-                "isMyMessage": false
-            }
-        ]
-    },
     {
         "SECONDARY_USER_ID": "2",
         "NAME": "Luis",
@@ -93,9 +73,6 @@ class ConversationPage extends Component {
 
     componentWillMount() {
 
-        let a = JSON.stringify(conversationsMock);
-        setItemOnDeviceLocalStorage("conversations", a);
-
         this.setUserInfosOnReducer();
         this.setConversationsOnReducer();
 
@@ -120,9 +97,12 @@ class ConversationPage extends Component {
 
         getItemOnDeviceLocalStorage("conversations").then(value => {
 
-            const conversationsAsJson = JSON.parse(value);
-
-            this.props.setConversations(conversationsAsJson);
+            if(value){
+                
+                const conversationsAsJson = JSON.parse(value);
+                this.props.setConversations(conversationsAsJson);
+                
+            }
 
         });
 
@@ -140,6 +120,7 @@ class ConversationPage extends Component {
     }
 
     render() {
+
         return (
             <View style = { styles.container }>
                 <SearchInputTop/>

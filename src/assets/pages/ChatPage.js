@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Dimensions,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Keyboard
 } from 'react-native';
 import { connect } from "react-redux";
 
@@ -80,6 +81,8 @@ class ChatPage extends Component {
 
     sendMessage() {
         
+        Keyboard.dismiss();
+
         const { messageInput } = this.state;
         const { currentConversation, userInfos } = this.props;
 
@@ -112,7 +115,7 @@ class ChatPage extends Component {
                 <ScrollView style = { styles.chatBox }>
                     { messages }    
                 </ScrollView>
-                <ScrollView style = { styles.inputBox }>
+                <View style = { styles.inputBox }>
                     <View style = { styles.inputView }>
 
                         <View style = { styles.input }>
@@ -132,7 +135,7 @@ class ChatPage extends Component {
                         </View>
                         
                     </View>
-                </ScrollView>
+                </View>
             </View>
         );
     }
@@ -140,28 +143,31 @@ class ChatPage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
-
+        flex: 1,
+        backgroundColor: "white"
     },
     chatBox: {
         width: "100%",
+        position: "relative",
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        backgroundColor: "white"
     },
     inputBox: {
-        position: "absolute",
+        position: "relative",
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height/10,
         bottom: 0,
+        marginTop: 5,
         
         borderTopWidth: 1,
-        borderColor: Colors.defaultBorderColor
+        borderColor: Colors.defaultBorderColor,
+        backgroundColor: "white"
     },
     inputView: {
         position: "relative",
-        flex: 1,
         flexDirection: "row",
         marginTop: 15
     },
@@ -175,7 +181,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     sendButtonImage: {
-        aspectRatio: 1
+        aspectRatio: 1,
+        zIndex: 1
     }
 });
 

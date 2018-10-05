@@ -5,7 +5,7 @@ function conversationsReducer(state = [], action) {
     let conversations;
 
     switch(action.type){
-        //arrumar
+        
         case SET_CONVERSATIONS:
             
             const newState = [...state];
@@ -17,7 +17,10 @@ function conversationsReducer(state = [], action) {
             action.conversations.forEach(conversation => {
 
                 if(conversationUserIds.indexOf(conversation.SECONDARY_USER_ID) === -1){
-                    newState.push(conversation);
+
+                    newState.unshift(conversation);
+                    return;
+
                 }
 
             });
@@ -26,7 +29,7 @@ function conversationsReducer(state = [], action) {
 
         case UPDATE_CONVERSATION:
 
-            conversations = state;
+            let conversations = [...state];
 
             conversations.forEach((conversation, i) => {
 
