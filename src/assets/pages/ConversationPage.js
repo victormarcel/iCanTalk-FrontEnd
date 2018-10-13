@@ -16,7 +16,7 @@ import FooterButtons from "../components/FooterButtons";
 import { 
     getUserinfosOnDeviceLocalStorage,
     fcmOnMessage,
-    removeItemOnDeviceLocalStorage,
+    setItemOnDeviceLocalStorage,
     getItemOnDeviceLocalStorage
 } from "../utils";
 import { 
