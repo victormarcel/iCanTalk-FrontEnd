@@ -10,6 +10,7 @@ import ChatPage from './assets/pages/ChatPage';
 import PreferencesPage from './assets/pages/PreferencesPage';
 
 import { Colors } from "./assets/res/styles";
+import { getStringByCode } from "./assets/res/strings"; 
 
 const Router = props => {
 
@@ -20,32 +21,32 @@ const Router = props => {
             "WelcomePage": {
                 screen: WelcomePage,
                 navigationOptions: {
-                    title: 'Bem-Vindo',
+                    title: getStringByCode("WELCOME"),
                     header: null
                 }
             },
             "RegistrationPage": {
                 screen: RegistrationPage,
                 navigationOptions: {
-                    title: 'Novo Usuário'
+                    title: getStringByCode("NEW_USER")
                 }
             },
             "ConversationPage": {
                 screen: ConversationPage,
                 navigationOptions: {
-                    title: 'Conversas'
+                    title: getStringByCode("TALKS")
                 }
             },
             "RelationshipPage": {
                 screen: RelationshipPage,
                 navigationOptions: {
-                    title: 'Amigos'
+                    title: getStringByCode("FRIENDS")
                 }
             },
             "AddFriendsPage": {
                 screen: AddFriendsPage,
                 navigationOptions: {
-                    title: 'Adicionar Amigos'
+                    title: getStringByCode("ADD_FRIEND")
                 }
             },
             "ChatPage": {
@@ -62,7 +63,7 @@ const Router = props => {
             "PreferencesPage": {
                 screen: PreferencesPage,
                 navigationOptions: {
-                    title: 'Preferências'
+                    title: getStringByCode("PREFERENCES")
                 }
             }
         },
