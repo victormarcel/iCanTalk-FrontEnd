@@ -55,19 +55,23 @@ const conversationsMock = [
 
 class ConversationPage extends Component {
 
-    static navigationOptions = {
-        headerRight: (
-            <TouchableOpacity onPress = { () => console.log("teste") }>
-                <Image
-                    source = { headerOptionsIcon }
-                />
-            </TouchableOpacity>
-        ),
+    static navigationOptions = ({ navigation }) => {
+        return{
+            headerRight: (
+                <TouchableOpacity onPress = { () => navigation.navigate("PreferencesPage") }>
+                    <Image
+                        source = { headerOptionsIcon }
+                    />
+                </TouchableOpacity>
+            )
+        }
     };
 
     constructor(props){
     
         super(props);
+
+        this.navigateToPreferencesPage = this.navigateToPreferencesPage.bind(this);
 
     }
 
@@ -76,6 +80,10 @@ class ConversationPage extends Component {
         this.setUserInfosOnReducer();
         this.setConversationsOnReducer();
 
+    }
+
+    navigateToPreferencesPage() {
+        this.props.navigation.navigate("PreferencesPage");
     }
 
     setUserInfosOnReducer() {

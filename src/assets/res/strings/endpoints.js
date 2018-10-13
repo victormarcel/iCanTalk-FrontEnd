@@ -12,6 +12,9 @@ const endPoints = {
     GET_USER_LIST_FRIENDS: "/relacionamento/listaamigos",
     GET_USER_SOLICITATIONS: "/relacionamento/solicitacoesporusuario",
     DELETE_RELATIONSHIP: "/relacionamento/removerelacionamento",
-    SEND_MESSAGE: "/message/sendmessagebyfcmtoken"
+    SEND_MESSAGE: "/message/sendmessagebyfcmtoken",
+
+    GET_USER_PREFERENCE: "/preferencias/obtemusuariopreferencias",
+    UPDATE_USER_PREFERENCE: "/preferencias/atualizarpreferencias"
 
 }

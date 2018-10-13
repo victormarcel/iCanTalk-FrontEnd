@@ -4,11 +4,17 @@ import {
     Text,
     StyleSheet,
     Picker,
-    Dimensions
+    Alert
 } from 'react-native';
+import { connect } from "react-redux";
 
 import { Colors } from "../res/styles/colors";
 import { getStringByCode } from "../res/strings"
+import { 
+    getUserPreferences, 
+    updateUserPreferences
+} from "../controllers";
+import { setItemOnDeviceLocalStorage, getItemOnDeviceLocalStorage } from '../utils';
 
 class PreferencesPage extends Component {
 
@@ -16,18 +22,50 @@ class PreferencesPage extends Component {
 
         super(props);
         this.state = {
+            savedLanguageOnDevice: "",
             selectedLanguage: ""
         }
 
     }
 
+    componentWillMount() {
+
+        getItemOnDeviceLocalStorage("preferencesLanguage").then(value => {
+            this.setState({selectedLanguage: value, savedLanguageOnDevice: value});
+        });
+
+
+    }
+
+    componentDidMount() {
+
+        const { id } = this.props.userInfos;
+
+        getUserPreferences(id).then(preferences => {
+
+            if(preferences){
+                this.setState({selectedLanguage: preferences.ID_IDIOMA});
+            }
+
+        });
+
+    };
+
     setSelectedLanguage(language){
 
-        this.setState(
-            {
-                selectedLanguage: language
-            }
-        )
+        const { id } = this.props.userInfos;
+
+        this.setState({ selectedLanguage: language });
+        
+        if(language !== this.state.savedLanguageOnDevice){
+
+            updateUserPreferences(id, language, 0);
+            setItemOnDeviceLocalStorage("preferencesLanguage", language);
+            this.setState({ savedLanguageOnDevice: language })
+
+            Alert.alert(getStringByCode("SUCCESS"), getStringByCode("PREFERENCE_LANGUAGE_SAVE"));
+
+        }
 
     }
 
@@ -42,11 +80,14 @@ class PreferencesPage extends Component {
                         style = { styles.languagePicker }
                         onValueChange = { itemValue => this.setSelectedLanguage(itemValue) }>
                             <Picker.Item 
+                                label = "Nenhum"
+                                value = "any" />
+                            <Picker.Item 
                                 label = { getStringByCode("PREFERENCE_PORTUGUESE_LANGUAGE_OPTION") }
-                                value="js" />
+                                value = "pt-Br" />
                             <Picker.Item 
                                 label = { getStringByCode("PREFERENCE_ENGLISH_LANGUAGE_OPTION") } 
-                                value="java" />
+                                value = "en" />
                     </Picker>
                 </View>
 
@@ -82,4 +123,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PreferencesPage;
+const mapStateToProps = state => {
+    return {
+        userInfos: state.userInfos
+    }
+}
+
+export default connect(mapStateToProps, null)(PreferencesPage);

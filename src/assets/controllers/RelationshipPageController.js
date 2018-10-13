@@ -49,7 +49,7 @@ export const getFriendsByUser = userId => {
     })
     .then(response => {
         return response.data.amigos;
-    }).catch(error => console.log(error));;
+    }).catch(error => console.log(error));
 
 }
 
