@@ -57,6 +57,7 @@ const ptBrStrings = {
     PREFERENCE_PORTUGUESE_LANGUAGE_OPTION: "Português",
     PREFERENCE_LANGUAGE_SELECT_TITLE: "Idioma",
     PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão.",
+    PREFERENCE_LANGUAGE_SAVE: "Idioma alterado com sucesso.",
 
     ADD_FRIENDS_ANY_SEARCHED_USERS: "Nenhum usuário encontrado!",
     SEND_SOLICITATION_QUESTION: function(userName){
