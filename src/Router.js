@@ -8,6 +8,7 @@ import RelationshipPage from './assets/pages/RelationshipPage';
 import AddFriendsPage from './assets/pages/AddFriendsPage';
 import ChatPage from './assets/pages/ChatPage';
 import PreferencesPage from './assets/pages/PreferencesPage';
+import TranslatorPage from './assets/pages/TranslatorPage';
 
 import { Colors } from "./assets/res/styles";
 import { getStringByCode } from "./assets/res/strings"; 
@@ -64,6 +65,12 @@ const Router = props => {
                 screen: PreferencesPage,
                 navigationOptions: {
                     title: getStringByCode("PREFERENCES")
+                }
+            },
+            "TranslatorPage": {
+                screen: TranslatorPage,
+                navigationOptions: {
+                    title: getStringByCode("TRANSLATOR")
                 }
             }
         },

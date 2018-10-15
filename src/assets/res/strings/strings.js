@@ -27,11 +27,19 @@ const ptBrStrings = {
     NO: "Não",
     FRIENDS: "Amigos",
     SUCCESS: "Sucesso",
+    ENGLISH: "Inglês",
+    PORTUGUESE: "Português",
+    TEXT: "Texto",
+    TRANSLATION: "Tradução",
+    TRANSLATE: "Traduzir",
+    DEFINITIONS: "Definições",
+    EXAMPLES: "Exemplos",
 
     NEW_USER: "Novo Usuário",
     TALKS: "Conversas",
     ADD_FRIEND: "Adicionar Amigo",
     PREFERENCES: "Preferências",
+    TRANSLATOR: "Tradutor",
 
     WELCOME_TEXT_1: "Está pronto para praticar um novo",
     WELCOME_TEXT_2: "idioma como nunca?",
@@ -39,6 +47,7 @@ const ptBrStrings = {
     WELCOME_TEXT_4: "e aproveite a melhor experiência para",
     WELCOME_TEXT_5: "estudar uma nova língua!",
     WELCOME_INIT_TEXT: "Seja bem-vindo ao iCanTalk!",
+    WELCOME_BUTTON_TEXT: "Vamos Começar",
 
     REGISTER_TEXT_1: "Preencha os campos abaixo e comece",
     REGISTER_TEXT_2: "a praticar um novo idioma agora mesmo!!!",
@@ -53,8 +62,6 @@ const ptBrStrings = {
     RELATIONSHIP_SOLICITATION_RECUSE: "Deseja recusar esta solicitação?",
     RELATIONSHIP_SOLICITATION_RECUSED: "Solicitação recusada!",
 
-    PREFERENCE_ENGLISH_LANGUAGE_OPTION: "Inglês",
-    PREFERENCE_PORTUGUESE_LANGUAGE_OPTION: "Português",
     PREFERENCE_LANGUAGE_SELECT_TITLE: "Idioma",
     PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão.",
     PREFERENCE_LANGUAGE_SAVE: "Idioma alterado com sucesso.",

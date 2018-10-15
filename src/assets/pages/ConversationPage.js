@@ -71,8 +71,6 @@ class ConversationPage extends Component {
     
         super(props);
 
-        this.navigateToPreferencesPage = this.navigateToPreferencesPage.bind(this);
-
     }
 
     componentWillMount() {
@@ -80,10 +78,6 @@ class ConversationPage extends Component {
         this.setUserInfosOnReducer();
         this.setConversationsOnReducer();
 
-    }
-
-    navigateToPreferencesPage() {
-        this.props.navigation.navigate("PreferencesPage");
     }
 
     setUserInfosOnReducer() {
