@@ -15,6 +15,9 @@ const endPoints = {
     SEND_MESSAGE: "/message/sendmessagebyfcmtoken",
 
     GET_USER_PREFERENCE: "/preferencias/obtemusuariopreferencias",
-    UPDATE_USER_PREFERENCE: "/preferencias/atualizarpreferencias"
+    UPDATE_USER_PREFERENCE: "/preferencias/atualizarpreferencias",
+
+    GET_TEXT_TRANSLATE: "/translate/translatetext",
+    GET_WORD_TRANSLATE: "/word/translationdefinitionexamples"
 
 }

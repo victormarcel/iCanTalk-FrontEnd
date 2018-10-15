@@ -83,10 +83,10 @@ class PreferencesPage extends Component {
                                 label = "Nenhum"
                                 value = "any" />
                             <Picker.Item 
-                                label = { getStringByCode("PREFERENCE_PORTUGUESE_LANGUAGE_OPTION") }
+                                label = { getStringByCode("PORTUGUESE") }
                                 value = "pt-Br" />
                             <Picker.Item 
-                                label = { getStringByCode("PREFERENCE_ENGLISH_LANGUAGE_OPTION") } 
+                                label = { getStringByCode("ENGLISH") } 
                                 value = "en" />
                     </Picker>
                 </View>

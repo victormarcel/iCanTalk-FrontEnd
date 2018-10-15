@@ -43,7 +43,7 @@ class WelcomePage extends Component {
                 </View>
 
                 <Button
-                    title = "Vamos Começar!"
+                    title = { getStringByCode("WELCOME_BUTTON_TEXT") }
                     color = { Colors.appDefaultColor }
                     onPress = { () => this.openRegistrationPage() }
                 />
