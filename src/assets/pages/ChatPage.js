@@ -10,6 +10,9 @@ import {
     Keyboard
 } from 'react-native';
 import { connect } from "react-redux";
+import Voice from 'react-native-voice';
+
+import HeaderIcons from "../components/HeaderIcons";
 
 import {
     relateMessageToChat
@@ -19,22 +22,46 @@ import {
 } from "../controllers";
 
 import Message from "../components/Message";
-
 import { Colors } from "../res/styles/colors";
 
 import sendButton from "../res/images/baseline_send_black_18dp.png";
+import micButton from "../res/images/baseline_mic_black_18dp.png";
+import translateButton from "../res/images/baseline_translate_white_18dp.png";
 
 class ChatPage extends Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return{
+            headerRight: (
+                <HeaderIcons
+                    buttons = {
+                        [
+                            {
+                                onPress: () => navigation.navigate("TranslatorPage"),
+                                icon: translateButton
+                            }
+                        ]
+                    }
+                />
+            )
+        }
+    };
 
     constructor(props){
 
         super(props);
         this.state = {
             messages: [],
-            messageInput: ""
+            messageInput: "",
+            startSpeechDisabled: false,
+            TouchableOpacityMic: 1
         }
 
         this.handlerMessages = this.handlerMessages.bind(this);
+
+        Voice.onSpeechStart = this.onSpeechStart.bind(this)
+        Voice.onSpeechResults = this.onSpeechResults.bind(this)
+        //Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this)
 
     }
 
@@ -46,6 +73,35 @@ class ChatPage extends Component {
             this.setState({messages: this.props.currentConversation.MESSAGES});
         }
 
+    }
+
+    onSpeechResults(result){
+
+        this.setState(
+            {
+                messageInput: result.value.toString().split(",")[0],
+                startSpeechDisabled: false,
+                TouchableOpacityMic: 1
+            }
+        );
+
+    }
+        
+    onSpeechStart(e){
+        this.setState(
+            {
+                startSpeechDisabled: true,
+                TouchableOpacityMic: 0.3
+            }
+        );
+    }
+
+    startSpeech() {
+        Voice.start('pt-BR');
+    }
+
+    endSpeech() {
+        Voice.stop();
     }
 
     handlerMessages() {
@@ -60,6 +116,7 @@ class ChatPage extends Component {
                         key = { index }
                         messageText = { message.messageText }
                         messageHour = { message.messageHour }
+                        messageAudioUrl = { message.messageAudioUrl }
                         isMyMessage = { message.isMyMessage }/>
             });
 
@@ -68,6 +125,14 @@ class ChatPage extends Component {
         }
 
         return handledMessages;
+
+    }
+
+    moveChatScrollToEnd() {
+
+        if(Boolean(this.refs.scrollViewChat)){
+            this.refs.scrollViewChat.scrollToEnd({animated: true});
+        }
 
     }
 
@@ -93,7 +158,11 @@ class ChatPage extends Component {
                 secondaryUserName: currentConversation.NAME,
                 secondaryUserFcmToken: currentConversation.FCM_TOKEN,
                 secondaryUserPicturyUrl: currentConversation.PICTURY_URL,
-                isMyMessage: true
+                isMyMessage: true,
+                receivedMessageInfos : {
+                    message: messageInput,
+                    audioUtl: ""
+                }
             }
 
             sendMessageByFcmToken(messageInfos.secondaryUserFcmToken, userInfos.id, messageInput);
@@ -110,13 +179,38 @@ class ChatPage extends Component {
         
         const messages = this.handlerMessages();
 
+        // if(messages && messages.length > 0){
+            
+        //     setTimeout(() => {
+        //         this.moveChatScrollToEnd();
+        //     }, 500);
+
+        // }
+
         return (
             <View style = { styles.container } >
-                <ScrollView style = { styles.chatBox }>
+                <ScrollView 
+                    ref = "scrollViewChat"
+                    style = { styles.chatBox }
+                    onContentSizeChange = { () => {        
+                        this.moveChatScrollToEnd();
+                    }} >
                     { messages }    
                 </ScrollView>
                 <View style = { styles.inputBox }>
                     <View style = { styles.inputView }>
+
+                        <View style = { styles.buttonView }>
+                            <TouchableOpacity
+                                style = { { opacity: this.state.TouchableOpacityMic } }
+                                disabled  = { this.state.startSpeechDisabled }
+                                onPress = { this.startSpeech }>
+                                <Image
+                                    style = { styles.buttonImage }
+                                    source = { micButton }
+                                />
+                            </TouchableOpacity>
+                        </View>
 
                         <View style = { styles.input }>
                             <TextInput 
@@ -125,10 +219,10 @@ class ChatPage extends Component {
                                 onChangeText = { value => this.onChangeHandler("messageInput", value) }/>
                         </View>
 
-                        <View style = { styles.sendButton }>
+                        <View style = { styles.buttonView }>
                             <TouchableOpacity onPress = { () => this.sendMessage() }>
                                 <Image
-                                    style = { styles.sendButtonImage }
+                                    style = { styles.buttonImage }
                                     source = { sendButton }
                                 />
                             </TouchableOpacity>
@@ -169,18 +263,18 @@ const styles = StyleSheet.create({
     inputView: {
         position: "relative",
         flexDirection: "row",
-        marginTop: 15
+        height: "100%"
     },
     input: {
-        flex: 0.85,
-        justifyContent: 'flex-end',
+        flex: 0.70,
+        justifyContent: 'flex-end'
     },
-    sendButton: {
+    buttonView: {
         flex: 0.15,
         alignItems: "center",
         justifyContent: "center"
     },
-    sendButtonImage: {
+    buttonImage: {
         aspectRatio: 1,
         zIndex: 1
     }

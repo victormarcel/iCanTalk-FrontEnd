@@ -3,7 +3,11 @@ package com.icantalk;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.wenkesj.voice.VoicePackage;
+import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import com.rnfs.RNFSPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -26,6 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNSoundPackage(),
+            new VoicePackage(),
+            new ImagePickerPackage(),
+        new RNFSPackage(),
         new RNFirebasePackage(),
         new RNFirebaseMessagingPackage(),
         new RNFirebaseNotificationsPackage()

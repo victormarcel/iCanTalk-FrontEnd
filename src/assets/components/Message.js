@@ -2,30 +2,89 @@ import React, { Component } from 'react';
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Image,
+    TouchableOpacity
 } from 'react-native';
+import Sound from 'react-native-sound';
 
 import { Colors } from "../res/styles/colors";
 
-const Message = props => {
+import playButton from "../res/images/baseline_play_arrow_black_18dp.png";
+import pauseButton from "../res/images/baseline_pause_black_18dp.png";
 
-    const { isMyMessage, messageText, messageHour } = props;
+class Message extends Component {
 
-    return (
-        <View style = { [styles.container, isMyMessage ? styles.receivedMessageBoxPosition : null] }>
-            <View style = {
-                    [
-                        styles.messageBox, 
-                        isMyMessage
-                        ? null
-                        : styles.receivedMessageBoxColor
-                    ] 
-                }>
-                <Text style = { styles.messageText }>{ messageText }</Text>
-                <Text style = { styles.messageHour }>{ messageHour }</Text>
+    constructor(props){
+
+        super(props);
+
+        this.state = {
+            buttonMessage: playButton
+        }
+
+    }
+
+    handlerPlayPause() {
+
+        const { messageAudioUrl } = this.props;
+
+        if(messageAudioUrl){
+            
+            return (
+
+                <TouchableOpacity onPress = { () => this.playMessageAudio() }>
+                    <Image source = { this.state.buttonMessage } />
+                </TouchableOpacity>
+    
+            );
+
+        }
+
+    }
+
+    playMessageAudio() {
+
+        const { messageAudioUrl } = this.props;
+
+        this.setState({buttonMessage: pauseButton});
+
+        const sound = new Sound(messageAudioUrl, null, (error) => {
+        
+            sound.play(success => {
+                
+                if(success){
+                    this.setState({buttonMessage: playButton});
+                }
+            
+            });
+
+        });
+
+    }
+
+    render() {
+        
+        const { isMyMessage, messageText, messageHour } = this.props;
+
+        return (
+            <View style = { [styles.container, isMyMessage ? styles.receivedMessageBoxPosition : null] }>
+                <View style = {
+                        [
+                            styles.messageBox, 
+                            isMyMessage
+                            ? null
+                            : styles.receivedMessageBoxColor
+                        ] 
+                    }>
+                    { this.handlerPlayPause() }
+                    <Text style = { styles.messageText }>{ messageText }</Text>
+                    <Text style = { styles.messageHour }>{ messageHour }</Text>
+                </View>
             </View>
-        </View>
-    );
+        );
+
+    }
 };
 
 
@@ -40,7 +99,7 @@ const styles = StyleSheet.create({
 
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 30,
+        paddingLeft: 15,
         paddingRight: 50,
         marginBottom: 10,
         
@@ -57,7 +116,8 @@ const styles = StyleSheet.create({
     messageText: {
         flexWrap: "wrap",
         color: "black",
-        marginRight: 20
+        marginRight: 20,
+        marginLeft: 10
     },
     messageHour: {
         position: "absolute",

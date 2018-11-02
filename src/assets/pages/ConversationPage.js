@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { 
     View,
     StyleSheet,
-    Image,
-    TouchableOpacity,
     FlatList,
     ScrollView
 } from 'react-native';
@@ -26,9 +24,11 @@ import {
 } from "../../redux/actions";
 import { getStringByCode } from "../res/strings";
 
-import headerOptionsIcon from "../res/images/baseline_more_vert_white_18dp.png";
+import HeaderIcons from "../components/HeaderIcons";
+
 import socialNetworksIcon from "../res/images/baseline_public_black_18dp.png";
 import friendsListIcon from "../res/images/round_view_list_black_18dp.png";
+import headerOptionsIcon from "../res/images/baseline_more_vert_white_18dp.png";
 
 const conversationsMock = [
     {
@@ -58,11 +58,16 @@ class ConversationPage extends Component {
     static navigationOptions = ({ navigation }) => {
         return{
             headerRight: (
-                <TouchableOpacity onPress = { () => navigation.navigate("PreferencesPage") }>
-                    <Image
-                        source = { headerOptionsIcon }
-                    />
-                </TouchableOpacity>
+                <HeaderIcons
+                    buttons = {
+                        [
+                            {
+                                onPress: () => navigation.navigate("PreferencesPage"),
+                                icon: headerOptionsIcon
+                            }
+                        ]
+                    }
+                />
             )
         }
     };
@@ -71,6 +76,10 @@ class ConversationPage extends Component {
     
         super(props);
 
+    }
+
+    componentDidMount() {
+        //const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
     }
 
     componentWillMount() {

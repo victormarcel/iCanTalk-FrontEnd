@@ -82,24 +82,25 @@ export const getConversationByUserId = userId => {
 
 }
 
-export const relateMessageToChat = (messageInfos, message) => {
+export const relateMessageToChat = (messageInfos) => {
 
     const searchedConversation = getConversationByUserId(messageInfos.secondaryUserId);
+    const { message } = messageInfos.receivedMessageInfos;
 
     if(!searchedConversation){
 
         messageInfos.firstMessage = message;
-        createConversation(messageInfos, messageInfos.isMyMessage);
+        createConversation(messageInfos);
 
     } else {
-        pushToConversationSendedMessage(searchedConversation, message, messageInfos.isMyMessage);
+        pushToConversationSendedMessage(searchedConversation, messageInfos);
     }
 
 }
 
-export const createConversation = (messageInfos, isMyFirstMessage) => {
+export const createConversation = (messageInfos) => {
     
-    const conversation = createConversationObject(messageInfos, isMyFirstMessage);
+    const conversation = createConversationObject(messageInfos);
 
     setCurrentConversationOnRedux(conversation);
     pushConversationOnRedux(conversation);
@@ -107,16 +108,17 @@ export const createConversation = (messageInfos, isMyFirstMessage) => {
 
 }
 
-export const createConversationObject = (messageInfos, isMyFirstMessage) => {
+export const createConversationObject = (messageInfos) => {
 
-    let message = buildMessage(messageInfos.firstMessage, isMyFirstMessage);
+    const { message, audioUrl } = messageInfos.receivedMessageInfos;
+    let buildedMessage = buildMessage(message, audioUrl, messageInfos.isMyMessage);
 
     const conversation = {
         SECONDARY_USER_ID: messageInfos.secondaryUserId.toString(),
         NAME: messageInfos.secondaryUserName,
         PICTURY_URL: messageInfos.secondaryUserPicturyUrl,
         FCM_TOKEN: messageInfos.secondaryUserFcmToken,
-        MESSAGES: [message],
+        MESSAGES: [buildedMessage],
         LAST_MESSAGE: messageInfos.firstMessage,
         LAST_MESSAGE_HOUR: moment().format("HH:MM")
     }
@@ -125,10 +127,11 @@ export const createConversationObject = (messageInfos, isMyFirstMessage) => {
 
 }
 
-export const buildMessage = (text, isMyMessage) => {
+export const buildMessage = (text, audioUrl, isMyMessage) => {
 
     return {
         "messageText": text,
+        "messageAudioUrl": audioUrl,
         "messageHour": moment().format("HH:mm"),
         "isMyMessage": isMyMessage
     }
@@ -143,9 +146,11 @@ export const setCurrentConversationOnRedux = conversation => {
     store.dispatch(setCurrentConversation(conversation));
 }
 
-export const pushToConversationSendedMessage = (conversation, message, isMyMssage) => {
+export const pushToConversationSendedMessage = (conversation, messageInfos) => {
 
-    const buildedMessage = buildMessage(message, isMyMssage);
+    const { message, audioUrl } = messageInfos.receivedMessageInfos;
+    const buildedMessage = buildMessage(message, audioUrl, messageInfos.isMyMessage);
+
     conversation.LAST_MESSAGE = message;
     conversation.LAST_MESSAGE_HOUR = moment().format("HH:mm");
 
