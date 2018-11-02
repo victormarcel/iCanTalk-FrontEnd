@@ -4,7 +4,7 @@ import {
     bindFormData
 } from "../utils";
 
-import { getEndPointByCode } from "../res/strings"
+import { getEndPointByCode } from "../res/strings";
 
 const mainEndPoint = getEndPointByCode("MAIN_APP");
 
@@ -43,14 +43,15 @@ export const translateText = (text, languageCode) => {
  * 
  * @returns {array} Conteúdo da tradução.
  */
-export const translateWord = (word, languageCode) => {
+export const translateWord = (word, languageCodeTo, languageCodeFrom) => {
 
     const wordTranslateEndPoint = getEndPointByCode("GET_WORD_TRANSLATE");
 
     const parameters = {
         params: {
             WORD: word,
-            LANGUAGE_CODE: languageCode
+            LANGUAGE_CODE_TO: languageCodeTo,
+            LANGUAGE_CODE_FROM: languageCodeFrom
         }
     }
 

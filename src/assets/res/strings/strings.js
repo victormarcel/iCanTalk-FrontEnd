@@ -34,6 +34,10 @@ const ptBrStrings = {
     TRANSLATE: "Traduzir",
     DEFINITIONS: "Definições",
     EXAMPLES: "Exemplos",
+    LANGUAGE: "Idioma",
+    TYPE: "Tipo",
+    AUDIO: "Áudio",
+    NONE: "Nenhum",
 
     NEW_USER: "Novo Usuário",
     TALKS: "Conversas",
@@ -62,15 +66,18 @@ const ptBrStrings = {
     RELATIONSHIP_SOLICITATION_RECUSE: "Deseja recusar esta solicitação?",
     RELATIONSHIP_SOLICITATION_RECUSED: "Solicitação recusada!",
 
-    PREFERENCE_LANGUAGE_SELECT_TITLE: "Idioma",
     PREFERENCE_INFORMATIONS: "Nesta tela você pode escolher o idioma em que\nas mensagens serão recebidas e a forma\nem que elas chegarão.",
     PREFERENCE_LANGUAGE_SAVE: "Idioma alterado com sucesso.",
+    PREFERENCE_MESSAGE_TYPE_SAVE: "Tipo de mensagem alterado com sucesso",
 
     ADD_FRIENDS_ANY_SEARCHED_USERS: "Nenhum usuário encontrado!",
     SEND_SOLICITATION_QUESTION: function(userName){
         return `Deseja enviar uma solicitação para ${ userName } ?`
     },
-    SEND_SOLICITATION_SUCCESS: "Solicitação enviada com sucesso!"
+    SEND_SOLICITATION_SUCCESS: "Solicitação enviada com sucesso!",
+
+    TRANSLATOR_ANY_EXAMPLE_SEARCHED: "Nenhum exemplo encontrado.",
+    TRANSLATOR_ANY_DEFINITION_SEARCHED: "Nenhuma definição encontrada.",
 
 
 }

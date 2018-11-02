@@ -14,7 +14,10 @@ import {
     getUserPreferences, 
     updateUserPreferences
 } from "../controllers";
-import { setItemOnDeviceLocalStorage, getItemOnDeviceLocalStorage } from '../utils';
+import { 
+    setItemOnDeviceLocalStorage,
+    getItemOnDeviceLocalStorage
+} from '../utils';
 
 class PreferencesPage extends Component {
 
@@ -23,7 +26,9 @@ class PreferencesPage extends Component {
         super(props);
         this.state = {
             savedLanguageOnDevice: "",
-            selectedLanguage: ""
+            savedMessageTypeOnDevice: "",
+            selectedLanguage: "0",
+            selectedMessageType: "0"
         }
 
     }
@@ -34,36 +39,68 @@ class PreferencesPage extends Component {
             this.setState({selectedLanguage: value, savedLanguageOnDevice: value});
         });
 
+        getItemOnDeviceLocalStorage("preferencesMessageType").then(value => {
+            this.setState({selectedMessageType: value, savedMessageTypeOnDevice: value});
+        });
+
 
     }
 
     componentDidMount() {
 
         const { id } = this.props.userInfos;
-
+        
         getUserPreferences(id).then(preferences => {
 
             if(preferences){
-                this.setState({selectedLanguage: preferences.ID_IDIOMA});
+
+                const lang = preferences.ID_IDIOMA.toString();
+                const type = preferences.ID_TIPO_MENSAGEM.toString();
+
+                this.setState({selectedLanguage: lang});
+                this.setState({selectedMessageType: type});
+                
+                setItemOnDeviceLocalStorage("preferencesLanguage", lang);
+                setItemOnDeviceLocalStorage("preferencesMessageType", type);
+                
             }
 
         });
 
     };
 
-    setSelectedLanguage(language){
+    savePreference(language, messageType){
 
         const { id } = this.props.userInfos;
 
-        this.setState({ selectedLanguage: language });
+        if(language){
+            this.setState({ selectedLanguage: language });
+        } else if(messageType){
+            this.setState({ selectedMessageType: messageType });
+        }
         
-        if(language !== this.state.savedLanguageOnDevice){
+        const { 
+            savedMessageTypeOnDevice,
+            savedLanguageOnDevice,
+            selectedLanguage,
+            selectedMessageType
+        } = this.state; 
 
-            updateUserPreferences(id, language, 0);
+        if(language && language !== savedLanguageOnDevice){
+
+            updateUserPreferences(id, language, selectedMessageType);
             setItemOnDeviceLocalStorage("preferencesLanguage", language);
             this.setState({ savedLanguageOnDevice: language })
 
             Alert.alert(getStringByCode("SUCCESS"), getStringByCode("PREFERENCE_LANGUAGE_SAVE"));
+
+        } else if (messageType && messageType !== savedMessageTypeOnDevice) {
+
+            updateUserPreferences(id, selectedLanguage, messageType);
+            setItemOnDeviceLocalStorage("preferencesMessageType", messageType);
+            this.setState({ savedMessageTypeOnDevice: messageType })
+
+            Alert.alert(getStringByCode("SUCCESS"), getStringByCode("PREFERENCE_MESSAGE_TYPE_SAVE"));
 
         }
 
@@ -73,22 +110,43 @@ class PreferencesPage extends Component {
         return (
             <View style = { styles.container }>
                 <Text style = { styles.informations }>{ getStringByCode("PREFERENCE_INFORMATIONS") }</Text>
-                <Text style = { styles.languageSelectLabel }>{ `${getStringByCode("PREFERENCE_LANGUAGE_SELECT_TITLE")}:` }</Text>
-                <View style = { styles.pickerView }>
-                    <Picker
-                        selectedValue = { this.state.selectedLanguage }
-                        style = { styles.languagePicker }
-                        onValueChange = { itemValue => this.setSelectedLanguage(itemValue) }>
-                            <Picker.Item 
-                                label = "Nenhum"
-                                value = "any" />
-                            <Picker.Item 
-                                label = { getStringByCode("PORTUGUESE") }
-                                value = "pt-Br" />
-                            <Picker.Item 
-                                label = { getStringByCode("ENGLISH") } 
-                                value = "en" />
-                    </Picker>
+                
+                <View style = { styles.pickerLangView}>
+                    <Text style = { styles.pickerLabel }>{ `${getStringByCode("LANGUAGE")}:` }</Text>
+                    <View style = { styles.pickerView }>
+                        <Picker
+                            selectedValue = { this.state.selectedLanguage }
+                            onValueChange = { itemValue => this.savePreference(itemValue, null) }>
+                                <Picker.Item 
+                                    label = { getStringByCode("NONE") }
+                                    value = { '0' } />
+                                <Picker.Item 
+                                    label = { getStringByCode("PORTUGUESE") }
+                                    value = { '1' } />
+                                <Picker.Item 
+                                    label = { getStringByCode("ENGLISH") } 
+                                    value = { '2' } />
+                        </Picker>
+                    </View>
+                </View>
+
+                <View>
+                    <Text style = { styles.pickerLabel }>{ `${getStringByCode("TYPE")}:` }</Text>
+                    <View style = { styles.pickerView }>
+                        <Picker
+                            selectedValue = { this.state.selectedMessageType }
+                            onValueChange = { itemValue => this.savePreference(null, itemValue) }>
+                                <Picker.Item 
+                                    label = { getStringByCode("NONE") }
+                                    value = { '0' } />
+                                <Picker.Item 
+                                    label = { getStringByCode("TEXT") }
+                                    value = { '1' } />
+                                <Picker.Item 
+                                    label = { getStringByCode("AUDIO") } 
+                                    value = { '2' } />
+                        </Picker>
+                    </View>
                 </View>
 
             </View>
@@ -102,6 +160,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 20
     },
+    pickerLangView: {
+        marginBottom: 40
+    },
     pickerView: {
         borderWidth: 1,
         borderColor: Colors.defaultBorderColor,
@@ -114,9 +175,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         marginTop: 30,
-        marginBottom: 30
+        marginBottom: 50
     },
-    languageSelectLabel: {
+    pickerLabel: {
         fontSize: 17,
         fontWeight: "bold",
         marginBottom: 2

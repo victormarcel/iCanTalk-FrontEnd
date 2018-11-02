@@ -55,12 +55,17 @@ class TranslatorPage extends Component {
 
     handlerDefinitionsAndExamples() {
 
-        const { showDefinitionsAndExamples, examples, definitions } = this.state;
+        const { 
+            showDefinitionsAndExamples,
+            examples,
+            definitions,
+            selectedLanguageTo
+        } = this.state;
 
-        if(showDefinitionsAndExamples){
+        if(showDefinitionsAndExamples && selectedLanguageTo === "en"){
 
             return (
-                <View>
+                <View style = { styles.handlerDefinitionsAndExamplesBox }>
                     <View>
                         <Text style = { styles.listTile }>{ getStringByCode("DEFINITIONS") }</Text>
                         <FlatList
@@ -70,6 +75,13 @@ class TranslatorPage extends Component {
                             )}
                             keyExtractor = { (item, index) => index.toString() }
                         />
+                        <Text>
+                            { 
+                                !definitions || definitions.length === 0
+                                ? <Text>{ getStringByCode("TRANSLATOR_ANY_DEFINITION_SEARCHED") }</Text> 
+                                :  null 
+                            }
+                        </Text> 
                     </View>
                     <View>
                         <Text style = { styles.listTile }>{ getStringByCode("EXAMPLES") }</Text>
@@ -80,6 +92,13 @@ class TranslatorPage extends Component {
                             )}
                             keyExtractor = { (item, index) => index.toString() }
                         />
+                        <Text>
+                            { 
+                                !examples || examples.length === 0
+                                ? <Text>{ getStringByCode("TRANSLATOR_ANY_EXAMPLE_SEARCHED") }</Text> 
+                                :  null 
+                            }
+                        </Text> 
                     </View>
                 </View>
             )
@@ -94,7 +113,7 @@ class TranslatorPage extends Component {
 
     searchTextTranslation() {
 
-        const { textToTranslate, selectedLanguageFrom } = this.state;
+        const { textToTranslate, selectedLanguageFrom, selectedLanguageTo } = this.state;
 
         if(textToTranslate){
             
@@ -103,7 +122,7 @@ class TranslatorPage extends Component {
 
             if(splitedText.length === 1){
 
-                translateWord(textToTranslate, selectedLanguageFrom).then(response => {
+                translateWord(textToTranslate, selectedLanguageTo, selectedLanguageFrom).then(response => {
                     this.setState(
                         {
                             isFindingTranslation: false,
@@ -202,9 +221,8 @@ class TranslatorPage extends Component {
                         />
                     </View>
 
-                    { this.handlerDefinitionsAndExamples() }
-
                     { this.handlerTranslationButton() }
+                    { this.handlerDefinitionsAndExamples() }
                     
             </ScrollView>
         );
@@ -246,6 +264,9 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 20,
         fontWeight: "bold"
+    },
+    handlerDefinitionsAndExamplesBox: {
+        marginBottom: 10
     }
 });
 

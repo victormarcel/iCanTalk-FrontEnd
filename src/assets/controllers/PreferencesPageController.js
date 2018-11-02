@@ -39,11 +39,7 @@ export const updateUserPreferences = (userId, languageCode, messageType) => {
     const requestParameters = bindSavePreferencesLanguageParams(userId, languageCode, messageType);
 
     return axios.post(`${mainEndPoint}${updatePreferencesEndPoint}`, requestParameters)
-        .then(() => {
-
-           console.log("funcionou");
-
-        })
+        .then(() => {})
         .catch(error => {
             throw(error);
         });

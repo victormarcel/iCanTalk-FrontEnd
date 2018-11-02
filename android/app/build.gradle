@@ -156,6 +156,10 @@ dependencies {
 
     // Firebase dependencies
     implementation project(':react-native-firebase')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-voice')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-sound')
     implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:16.0.1"
 

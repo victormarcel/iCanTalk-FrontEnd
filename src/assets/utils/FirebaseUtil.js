@@ -40,10 +40,11 @@ export const fcmOnMessage = firebase.messaging().onMessage((message) => {
             secondaryUserName: receivedMessageInfos.senderName,
             secondaryUserFcmToken: receivedMessageInfos.senderFcmToken,
             secondaryUserPicturyUrl: receivedMessageInfos.senderPicturyUrl,
-            isMyMessage: false
+            isMyMessage: false,
+            receivedMessageInfos: receivedMessageInfos
         }
 
-        relateMessageToChat(messageInfos, receivedMessageInfos.message);
+        relateMessageToChat(messageInfos);
 
     }
 
