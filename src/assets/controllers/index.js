@@ -4,3 +4,5 @@ export * from "./RelationshipPageController";
 export * from "./ChatPageController";
 export * from "./PreferencesPageController";
 export * from "./TranslatorPageController";
+export * from "./InterestsPageController";
+export * from "./SocialNetworkController";

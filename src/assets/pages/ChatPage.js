@@ -175,17 +175,8 @@ class ChatPage extends Component {
     }
 
     render() {
-
         
         const messages = this.handlerMessages();
-
-        // if(messages && messages.length > 0){
-            
-        //     setTimeout(() => {
-        //         this.moveChatScrollToEnd();
-        //     }, 500);
-
-        // }
 
         return (
             <View style = { styles.container } >

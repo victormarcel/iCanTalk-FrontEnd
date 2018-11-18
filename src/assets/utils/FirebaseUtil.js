@@ -4,7 +4,10 @@ import {
 import firebase from 'react-native-firebase';
 
 import {
-    relateMessageToChat
+    relateMessageToChat,
+    setOnlineUsersOnRedux,
+    addNewOnlineUserToSocialNetWork,
+    removeOnlineUserOnRedux
 } from "../utils";
 
 export const getDeviceFcmToken = () => {
@@ -46,9 +49,17 @@ export const fcmOnMessage = firebase.messaging().onMessage((message) => {
 
         relateMessageToChat(messageInfos);
 
+    } else if (message.data.type === "new_user_socialnetwork"){
+        addNewOnlineUserToSocialNetWork(message.data);
+    } else if (message.data.type === "online_users_social_network"){
+        setOnlineUsersOnRedux(message.data.countUsersOnSocialNetwork);
+    } else if (message.data.type === "remove_user_socialnetwork"){
+        removeOnlineUserOnRedux(message.data.USER_ID);
     }
 
 });
+
+
 
 // Criando ou recuperando um token para um device;
         /*firebase.messaging().getToken()
