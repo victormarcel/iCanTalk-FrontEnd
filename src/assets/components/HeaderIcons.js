@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { 
     View,
@@ -8,8 +7,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-
-// create a component
 const HeaderIcons = props => {
 
     const bindButtons = () => {
@@ -41,7 +38,6 @@ const HeaderIcons = props => {
     );
 };
 
-// define your styles
 const styles = StyleSheet.create({
     headerIcons: {
         flex: 1,

@@ -38,12 +38,16 @@ const ptBrStrings = {
     TYPE: "Tipo",
     AUDIO: "Áudio",
     NONE: "Nenhum",
+    INTERESTS: "Interesses",
+    SOCIAL: "Social",
+    USERS: "Usuários",
 
     NEW_USER: "Novo Usuário",
     TALKS: "Conversas",
     ADD_FRIEND: "Adicionar Amigo",
     PREFERENCES: "Preferências",
     TRANSLATOR: "Tradutor",
+    WAIT: "Aguarde",
 
     WELCOME_TEXT_1: "Está pronto para praticar um novo",
     WELCOME_TEXT_2: "idioma como nunca?",
@@ -78,6 +82,8 @@ const ptBrStrings = {
 
     TRANSLATOR_ANY_EXAMPLE_SEARCHED: "Nenhum exemplo encontrado.",
     TRANSLATOR_ANY_DEFINITION_SEARCHED: "Nenhuma definição encontrada.",
+
+    SOCIAL_NETWORK_ONLINE_USERS: "Usuários online"
 
 
 }

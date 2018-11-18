@@ -11,7 +11,7 @@ import { setIsRegisteredUser }  from "./redux/actions";
 //TODO - RETIRAR ESTE CÓDIO
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings([
-    'Warning: isMounted(...) is deprecated',
+    'Warning: isMounted(...) is deprecated in plain JavaScript React classes. Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks.',
     'Module RCTImageLoader', 
     'Remote debugger is in a background tab which may cause apps to perform slowly'
 ]);

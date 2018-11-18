@@ -33,7 +33,7 @@ const FooterButtons = props => {
 
     return (
         <View style = { styles.footer }>
-            {renderFooterButtons()}
+            { renderFooterButtons() }
         </View>
     );
 };

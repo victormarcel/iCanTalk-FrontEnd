@@ -18,6 +18,15 @@ const endPoints = {
     UPDATE_USER_PREFERENCE: "/preferencias/atualizarpreferencias",
 
     GET_TEXT_TRANSLATE: "/translate/translatetext",
-    GET_WORD_TRANSLATE: "/word/translationdefinitionexamples"
+    GET_WORD_TRANSLATE: "/word/translationdefinitionexamples",
+
+    GET_SUBJECTS_BY_LANG: "/subjects/getsubjectsbylang",
+    GET_SUBJECTS_BY_USER: "/subjects/getsubjectsbyuser",
+
+    ADD_USER_INTEREST: "/subjects/insertusersubjectrelationship",
+    DELETE_USER_INTEREST: "/subjects/deleteusersubjectrelationship",
+
+    JOIN_USER_TO_SOCIAL_NETWORK: "/socialnetwork/join",
+    LEAVE_USER_TO_SOCIAL_NETWORK: "/socialnetwork/leave",
 
 }

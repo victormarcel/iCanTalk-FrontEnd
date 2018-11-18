@@ -10,7 +10,11 @@ import {
     setConversations,
     setCurrentConversation,
     updateConversation,
-    pushMessageToCurrentConversation
+    pushMessageToCurrentConversation,
+    setOnlineUsersCount,
+    addOnlineUser,
+    removeOnlineUser,
+    resetOnlineUsers
  } from "../../redux/actions";
  import { 
     sendMessageByFcmToken
@@ -71,7 +75,7 @@ export const getConversationByUserId = userId => {
     let searchedConversation = [];
 
     searchedConversation = conversations.filter(conversation => {
-        return conversation.SECONDARY_USER_ID === userId;
+        return conversation.SECONDARY_USER_ID == userId;
     });
 
     if(searchedConversation.length === 0){
@@ -211,4 +215,54 @@ export const pushMessageToSavedConversation = (receivedConversation, message) =>
 
     });
 
+}
+
+export const setOnlineUsersOnRedux = onlineUsersCount => {
+    store.dispatch(setOnlineUsersCount(onlineUsersCount));
+}
+
+export const addNewOnlineUserToSocialNetWork = user => {
+
+    const userToSet = {
+        ID_USUARIO: user.SECONDARY_USER_ID,
+        NOME_USUARIO_AMIGO: user.NAME,
+        DESCRICAO_USUARIO_AMIGO: user.USER_DESCRIPTION,
+        URL_IMAGEM_PERFIL_USUARIO_AMIGO: user.PICTURY_URL,
+        FCM_TOKEN:user.FCM_TOKEN
+    }
+
+    store.dispatch(addOnlineUser(userToSet));
+
+}
+
+export const removeOnlineUserOnRedux = userId => {
+    store.dispatch(removeOnlineUser(userId));
+}
+
+export const showOnlineUsers = users => {
+
+    let onlineUsers = [];
+
+    if(users){
+
+        onlineUsers = users.map(user => {
+
+            return {
+                ID_USUARIO: user.ID,
+                NOME_USUARIO_AMIGO: user.NOME,
+                DESCRICAO_USUARIO_AMIGO: user.DESCRICAO,
+                URL_IMAGEM_PERFIL_USUARIO_AMIGO: user.URL_IMAGEM_PERFIL,
+                FCM_TOKEN: user.FCM_TOKEN
+            }
+    
+        });
+
+    }
+
+    store.dispatch(addOnlineUser(onlineUsers));
+
+}
+
+export const resetOnlineUsersOnRedux = () => {
+    store.dispatch(resetOnlineUsers());
 }

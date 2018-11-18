@@ -9,6 +9,9 @@ import AddFriendsPage from './assets/pages/AddFriendsPage';
 import ChatPage from './assets/pages/ChatPage';
 import PreferencesPage from './assets/pages/PreferencesPage';
 import TranslatorPage from './assets/pages/TranslatorPage';
+import SocialNetwork from './assets/pages/SocialNetwork';
+import InterestsPage from './assets/pages/InterestsPage';
+import SocialMediaNetworkUsersPage from './assets/pages/SocialNetworkUsersPage';
 
 import { Colors } from "./assets/res/styles";
 import { getStringByCode } from "./assets/res/strings"; 
@@ -72,7 +75,26 @@ const Router = props => {
                 navigationOptions: {
                     title: getStringByCode("TRANSLATOR")
                 }
+            },
+            "SocialNetwork": {
+                screen: SocialNetwork,
+                navigationOptions: {
+                    title: getStringByCode("SOCIAL")
+                }
+            },
+            "InterestsPage": {
+                screen: InterestsPage,
+                navigationOptions: {
+                    title: getStringByCode("INTERESTS")
+                }
+            },
+            "SocialNetworkUsersPage": {
+                screen: SocialMediaNetworkUsersPage,
+                navigationOptions: {
+                    title: getStringByCode("USERS")
+                }
             }
+
         },
         {
             navigationOptions: {

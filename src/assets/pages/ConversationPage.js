@@ -14,7 +14,6 @@ import FooterButtons from "../components/FooterButtons";
 import { 
     getUserinfosOnDeviceLocalStorage,
     fcmOnMessage,
-    setItemOnDeviceLocalStorage,
     getItemOnDeviceLocalStorage
 } from "../utils";
 import { 
@@ -76,10 +75,6 @@ class ConversationPage extends Component {
     
         super(props);
 
-    }
-
-    componentDidMount() {
-        //const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
     }
 
     componentWillMount() {
@@ -152,9 +147,13 @@ class ConversationPage extends Component {
                         {
                             icon: friendsListIcon,
                             label: getStringByCode("CONVERSATION_FRIENDS_BUTTON_LABEL"),
-                            onNavigate: () => {this.props.navigation.navigate("RelationshipPage")}
+                            onNavigate: () => this.props.navigation.navigate("RelationshipPage")
                         },
-                        {icon: socialNetworksIcon, label: getStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL")}
+                        {
+                            icon: socialNetworksIcon,
+                            label: getStringByCode("CONVERSATION_SOCIAL_NETWORK_BUTTON_LABEL"),
+                            onNavigate: () => this.props.navigation.navigate("SocialNetwork")
+                        }
                     ] 
                 }/>
             </View>

@@ -325,5 +325,5 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RelashionshipPage);;
+export default connect(mapStateToProps, mapDispatchToProps)(RelashionshipPage);
 
