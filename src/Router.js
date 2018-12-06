@@ -12,6 +12,10 @@ import TranslatorPage from './assets/pages/TranslatorPage';
 import SocialNetwork from './assets/pages/SocialNetwork';
 import InterestsPage from './assets/pages/InterestsPage';
 import SocialMediaNetworkUsersPage from './assets/pages/SocialNetworkUsersPage';
+import SettingsPage from './assets/pages/SettingsPage';
+import AvaliationPage from './assets/pages/AvaliationPage';
+import DescriptionEditPage from './assets/pages/DescriptionEditPage';
+import AppLanguagePage from './assets/pages/AppLanguagePage';
 
 import { Colors } from "./assets/res/styles";
 import { getStringByCode } from "./assets/res/strings"; 
@@ -93,6 +97,30 @@ const Router = props => {
                 navigationOptions: {
                     title: getStringByCode("USERS")
                 }
+            },
+            "SettingsPage": {
+                screen: SettingsPage,
+                navigationOptions: {
+                    title: getStringByCode("SETTINGS")
+                }
+            },
+            "AvaliationPage": {
+                screen: AvaliationPage,
+                navigationOptions: {
+                    title: getStringByCode("AVALIATION")
+                }
+            },
+            "DescriptionEditPage": {
+                screen: DescriptionEditPage,
+                navigationOptions: {
+                    title: getStringByCode("EDITION")
+                }
+            },
+            "AppLanguagePage": {
+                screen: AppLanguagePage,
+                navigationOptions: {
+                    title: getStringByCode("LANGUAGE")
+                }
             }
 
         },
@@ -109,7 +137,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": isRegisteredUser ? "ConversationPage" : "WelcomePage"
+            "initialRouteName": isRegisteredUser ? "AppLanguagePage" : "WelcomePage"
         }   
     );
 

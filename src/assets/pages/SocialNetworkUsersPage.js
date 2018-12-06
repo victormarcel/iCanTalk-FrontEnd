@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    FlatList,
-    BackHandler
+    FlatList
 } from 'react-native';
 import { connect } from "react-redux";
 

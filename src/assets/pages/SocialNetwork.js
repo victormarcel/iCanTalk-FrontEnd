@@ -3,7 +3,8 @@ import {
     View,
     Text,
     Button,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 import { connect } from 'react-redux'
 
@@ -32,14 +33,11 @@ class SocialNetwork extends Component {
         return (
             <View style = { styles.container }>
                 <View style = { styles.searchUsersView }>
+                    <Text style = { styles.welcomeText }>{ getStringByCode("SOCIAL_NETWORK_WELCOME_MESSAGE") }</Text>
                     <Button
-                        title = "join"
+                        title = { getStringByCode("JOIN") }
                         onPress = { () => this.joinSocialNetwork() }
                     />
-                    {/* <Button
-                        title = "leave"
-                        onPress = { () => leaveUserToSocialNetwork(id) }
-                    /> */}
                 </View>
                 <FooterButtons buttons = { 
                     [
@@ -59,10 +57,18 @@ class SocialNetwork extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
     searchUsersView: {
-        flex: 1
+        flex: 1,
+        padding: 10
+    },
+    welcomeText: {
+        textAlign: 'center',
+        fontSize: 18,
+        color: "black",
+        marginTop: Dimensions.get("window").height/5,
+        marginBottom: 50
     }
 });
 

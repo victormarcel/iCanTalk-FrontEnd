@@ -41,6 +41,11 @@ const ptBrStrings = {
     INTERESTS: "Interesses",
     SOCIAL: "Social",
     USERS: "Usuários",
+    SETTINGS: "Configurações",
+    JOIN: "Entrar",
+    AVALIATION: "Avaliação",
+    DESCRIPTION: "Descrição",
+    EDITION: "Edição",
 
     NEW_USER: "Novo Usuário",
     TALKS: "Conversas",
@@ -83,7 +88,10 @@ const ptBrStrings = {
     TRANSLATOR_ANY_EXAMPLE_SEARCHED: "Nenhum exemplo encontrado.",
     TRANSLATOR_ANY_DEFINITION_SEARCHED: "Nenhuma definição encontrada.",
 
-    SOCIAL_NETWORK_ONLINE_USERS: "Usuários online"
+    SOCIAL_NETWORK_ONLINE_USERS: "Usuários online",
+    SOCIAL_NETWORK_WELCOME_MESSAGE: "Bem-vindo a iCanTalk Network!\n\nPressione o botão \"Entrar\" e encontre novos usuários para praticar\num idioma.",
 
+    APP_LANGUAGE: "Idioma da aplicação",
+    APP_LANGUAGE_DESCRIPTION: "Defina o idioma da aplicação"
 
 }

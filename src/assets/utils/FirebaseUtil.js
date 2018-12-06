@@ -33,7 +33,7 @@ export const getDeviceFcmToken = () => {
 }
 
 export const fcmOnMessage = firebase.messaging().onMessage((message) => {
-    
+
     const receivedMessageInfos = message.data;
 
     if(message.data.type === "chat_message"){
