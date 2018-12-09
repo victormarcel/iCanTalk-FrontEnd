@@ -137,7 +137,7 @@ const Router = props => {
                     fontSize: 20
                 }
             },
-            "initialRouteName": isRegisteredUser ? "AppLanguagePage" : "WelcomePage"
+            "initialRouteName": isRegisteredUser ? "ConversationPage" : "WelcomePage"
         }   
     );
 

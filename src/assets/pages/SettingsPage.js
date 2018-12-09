@@ -6,31 +6,48 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    ActivityIndicator
 } from 'react-native';
+import { connect } from "react-redux";
 
 import AvaliationComponent from '../components/AvaliationComponent';
 import BasicItemList from '../components/BasicItemList';
+import { setUserPictury } from "../../redux/actions";
 
 import { Colors } from "../res/styles/colors";
-import editButton from "../res/images/baseline_edit_black_18dp.png";
+import { getStringByCode } from "../res/strings";
+import ImagePicker from 'react-native-image-picker';
 
-const menuItens = [
-    {
-        "label": "Editar foto de perfil",
-        "onPress": ""
-    },
-    {
-        "label": "Preferências",
-        "onPress": ""
-    },
-    {
-        "label": "Idioma da aplicação",
-        "onPress": ""
-    }
-]
+import {
+    saveUserPictury,
+    setUserImageUrlOnLocalStorageDevice
+} from "../controllers";
+
+import editButton from "../res/images/baseline_edit_black_18dp.png";
+const defaultImageUrl = "https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png";
 
 class SettingsPage extends Component {
+
+    constructor(props){
+
+        super(props);
+
+        this.state = {
+            imageUrl: "",
+            isLoadingPictury: false
+        }
+
+    }
+
+    componentWillMount() {
+
+        const { userInfos } = this.props;
+        const userPicturyUrl = userInfos.pictureUrl;
+
+        this.setState({imageUrl: userPicturyUrl ? userPicturyUrl : defaultImageUrl});
+
+    }
 
     formatDescription(description) {
 
@@ -42,21 +59,133 @@ class SettingsPage extends Component {
 
     }
 
+    returnMenuItems(){
+
+        menuItems = [
+            {
+                label: getStringByCode("EDIT_PICTURY"),
+                onClick: () => this.getPictury()
+            },
+            {
+                label: getStringByCode("PREFERENCES"),
+                onClick: () => this.goToPreferencesPage()
+            },
+            {
+                label: getStringByCode("APP_LANGUAGE"),
+                onClick: () => this.goToAppLanguagePage()
+            }
+        ]
+
+        return menuItems;
+
+    }
+
+    goToDescriptionEditPage(){
+        this.props.navigation.navigate("DescriptionEditPage");
+    }
+
+    goToPreferencesPage(){
+        this.props.navigation.navigate("PreferencesPage");
+    }
+
+    goToAppLanguagePage(){
+        this.props.navigation.navigate("AppLanguagePage");
+    }
+
+    getPictury(){
+
+        const options = {
+            title: getStringByCode("EDIT_PICTURY"),
+            chooseFromLibraryButtonTitle: getStringByCode("SELECT_FROM_LIBRARY"),
+            takePhotoButtonTitle: getStringByCode("TAKE_PHOTO"),
+            cancelButtonTitle: getStringByCode("CANCEL"),
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+        
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }else {
+                this.savePictury(response.data);
+            }
+
+        });
+
+    }
+
+    savePictury(base64){
+
+        const { userInfos } = this.props;
+
+        this.setState(
+            {
+                isLoadingPictury: true,
+                imageUrl: defaultImageUrl
+            }
+        );
+
+        saveUserPictury(userInfos.id, base64).then(response => {
+
+            const imageUrl = response.data.url;
+
+            this.props.setUserPictury(imageUrl);
+            setUserImageUrlOnLocalStorageDevice(imageUrl);
+            this.setState(
+                {
+                    imageUrl: imageUrl,
+                    isLoadingPictury: false
+                }
+            );
+
+        }).catch(() => {
+            this.setState({isLoadingPictury: false});
+        });
+
+    }
+
+    showPicturyLoading() {
+
+        const { isLoadingPictury } = this.state;
+
+        if(isLoadingPictury) {
+            return (
+                <ActivityIndicator 
+                    style = { styles.fetchPictury }
+                    size = "large" 
+                    color = { Colors.appDefaultColor } />
+            )
+        } else {
+            return null
+        }
+
+    }
+
     render() {
+
+        const { userInfos } = this.props;
+        const { imageUrl } = this.state;
+
         return (
             <View style = { styles.container }>
                 <View style = { styles.header }>
                     <View style = { styles.avatarView }>
                         <Image 
                             style = { styles.avatar }
-                            source = {{ uri: "https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" }}
+                            source = { {uri: imageUrl} }
                         />
+                        { this.showPicturyLoading() }
                     </View>
                     <View style = { styles.titles }>
                         <Text style = { styles.title }>Victor</Text>
-                        <Text style = { styles.description }>{ this.formatDescription("Procurando pessoas para praticar meu inglês") }</Text>
+                        <Text style = { styles.description }>{ this.formatDescription(userInfos.description) }</Text>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = { () => this.goToDescriptionEditPage() }>
                         <Image 
                             style = { styles.editButtonIcon }
                             source = { editButton }
@@ -65,12 +194,13 @@ class SettingsPage extends Component {
                 </View>
                 <View style = { styles.menuOptions }>
                     <FlatList
-                        data = { menuItens }
+                        data = { this.returnMenuItems() }
                         renderItem = { ({item}) => ( 
                             <BasicItemList 
                                 label = { item.label }
                                 padding = { 10 }
-                                labelSize = { 17 }/>
+                                labelSize = { 17 }
+                                onPress = { item.onClick }/>
                         )}
                         keyExtractor = { (item, i) => i.toString() }
                     />
@@ -106,6 +236,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get("window").width/4,
         borderRadius: 50,
         marginLeft: 10,
+        justifyContent: "center"
     },
     avatar: {
         aspectRatio: 1,
@@ -135,7 +266,22 @@ const styles = StyleSheet.create({
     },
     userAvaliations: {
         flex: 0.45
+    },
+    fetchPictury: {
+        position: "absolute",
+        alignSelf: "center"
     }
 });
 
-export default SettingsPage;
+const mapDispatchToProps = {
+    setUserPictury
+}
+
+const mapStateToProps = state => {
+    return {
+        userInfos: state.userInfos
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
+

@@ -19,6 +19,7 @@ const TextArea = props => {
                 placeholder = { props.placeHolder }
                 editable = { props.editable }
                 onChangeText = { value => props.onChangeText(value) }
+                style = { styles.textBox }
             />
         </View>
     );
@@ -30,6 +31,9 @@ const styles = StyleSheet.create({
         flex: 1,
         borderWidth: 2,
         borderColor: Colors.defaultBorderColor
+    },
+    textBox: {
+        textAlignVertical: "top"
     }
 });
 

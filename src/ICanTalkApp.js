@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { getItemOnDeviceLocalStorage } from "./assets/utils/DeviceLocalStorage";
+import { setAppLang } from "./assets/res/strings/appLang";
 import {
     View
 } from "react-native";
@@ -26,6 +28,18 @@ class ICanTalkApp extends Component{
             isRegisteredUser: "",
             executedIsRegisteredUserPromise: false
         }
+
+    }
+
+    componentWillMount() {
+        
+        getItemOnDeviceLocalStorage("applang").then(lang => {
+            
+            if(lang){
+                setAppLang(lang)
+            }
+
+        });
 
     }
 

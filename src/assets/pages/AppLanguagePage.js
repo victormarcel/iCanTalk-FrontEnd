@@ -4,16 +4,13 @@ import {
     Text,
     StyleSheet,
     Picker,
-    Alert
+    Alert,
+    BackHandler
 } from 'react-native';
 import { connect } from "react-redux";
 
 import { Colors } from "../res/styles/colors";
 import { getStringByCode } from "../res/strings"
-import { 
-    getUserPreferences, 
-    updateUserPreferences
-} from "../controllers";
 import { 
     setItemOnDeviceLocalStorage,
     getItemOnDeviceLocalStorage
@@ -25,26 +22,52 @@ class AppLanguagePage extends Component {
 
         super(props);
         this.state = {
-            savedLanguageOnDevice: "",
-            selectedLanguage: "0"
+            langToSave: "",
+            selectedLanguage: "pt"
         }
 
     }
 
     componentWillMount() {
 
-        // getItemOnDeviceLocalStorage("preferencesLanguage").then(value => {
-        //     this.setState({selectedLanguage: value, savedLanguageOnDevice: value});
-        // });
+        getItemOnDeviceLocalStorage("applang").then(lang => {
 
+            if(lang){
+                this.setState({selectedLanguage: lang, langToSave: lang});
+            }
+
+        });
 
     }
+    
+    setAppLanguage(lang){
 
-    componentDidMount() {
+        const { langToSave } = this.state;
 
-        
+        if(langToSave && langToSave != lang) {
 
-    };
+            this.setState({selectedLanguage: lang, langToSave: lang});
+            setItemOnDeviceLocalStorage("applang", lang);
+
+            Alert.alert(
+                getStringByCode("LANGUAGE"),
+                getStringByCode("APP_LANGUAGE_RESTART"),
+                [
+                    {
+                        text: getStringByCode("YES"),
+                        onPress: () => BackHandler.exitApp()
+                    },
+                    {
+                        text: getStringByCode("NO"),
+                        onPress: () => console.log('Cancel Pressed'), style: 'cancel'
+                    }
+                ],
+                { cancelable: true }
+            )
+
+        }
+
+    }
 
     render() {
         return (
@@ -56,13 +79,13 @@ class AppLanguagePage extends Component {
                     <View style = { styles.pickerView }>
                         <Picker
                             selectedValue = { this.state.selectedLanguage }
-                            onValueChange = { itemValue => this.savePreference(itemValue, null) }>
+                            onValueChange = { itemValue => this.setAppLanguage(itemValue) }>
                                 <Picker.Item 
                                     label = { getStringByCode("PORTUGUESE") }
-                                    value = { '1' } />
+                                    value = { 'pt' } />
                                 <Picker.Item 
                                     label = { getStringByCode("ENGLISH") } 
-                                    value = { '2' } />
+                                    value = { 'en' } />
                         </Picker>
                     </View>
                 </View>
