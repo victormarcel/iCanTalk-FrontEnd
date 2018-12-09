@@ -6,3 +6,5 @@ export * from "./PreferencesPageController";
 export * from "./TranslatorPageController";
 export * from "./InterestsPageController";
 export * from "./SocialNetworkController";
+export * from "./DescriptionEditPageController";
+export * from "./SettingsPageController";

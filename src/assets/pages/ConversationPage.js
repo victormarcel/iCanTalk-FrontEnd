@@ -61,7 +61,7 @@ class ConversationPage extends Component {
                     buttons = {
                         [
                             {
-                                onPress: () => navigation.navigate("PreferencesPage"),
+                                onPress: () => navigation.navigate("SettingsPage"),
                                 icon: headerOptionsIcon
                             }
                         ]

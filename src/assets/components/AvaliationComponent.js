@@ -15,18 +15,41 @@ class AvaliationComponent extends Component {
 
     constructor(props){
         super(props);
+
+        this.state = {
+            1: true,
+            2: false,
+            3: false,
+            4: false,
+            5: false
+        }
+
     }
 
-    buildStart() {
+    buildStart(startNumber) {
+
+        const stateStar = this.state[startNumber];
 
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress = { () => this.setStartState(startNumber) }>
                 <Image 
                     style = { styles.starButton }
-                    source = { emptyStart }
+                    source = { stateStar ? checkedStart : emptyStart }
                 />
             </TouchableOpacity>
         )
+
+    }
+
+    setStartState(startNumber){
+
+        for(var i = 1; i <= startNumber; i++){
+            this.setState({[i]: true})
+        }
+
+        for(var i = startNumber + 1; i <= 5; i++){
+            this.setState({[i]: false})
+        }
 
     }
 
@@ -35,11 +58,11 @@ class AvaliationComponent extends Component {
             <View style = { styles.container }>
                 <Text style = { styles.title }>{ this.props.label }</Text>
                 <View style = { styles.stars }>
-                    { this.buildStart() }
-                    { this.buildStart() }
-                    { this.buildStart() }
-                    { this.buildStart() }
-                    { this.buildStart() }
+                    { this.buildStart(1) }
+                    { this.buildStart(2) }
+                    { this.buildStart(3) }
+                    { this.buildStart(4) }
+                    { this.buildStart(5) }
                 </View>
             </View>
         );

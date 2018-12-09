@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    FlatList
+    FlatList,
+    AppState
 } from 'react-native';
 import { connect } from "react-redux";
 
@@ -31,6 +32,24 @@ class SocialNetworkUsersPage extends Component {
 
         super(props);
 
+        this.state = {
+            appState: AppState.currentState
+        }
+
+    }
+
+    componentDidMount() {
+        AppState.addEventListener('change', this.handleAppStateChange);
+    }
+    
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this.handleAppStateChange);
+    }
+    
+    handleAppStateChange = (nextAppState) => {
+        if (nextAppState === 'inactive') {
+            this.leaveSocialNetwork();
+        }    
     }
 
     componentDidMount() {

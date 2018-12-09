@@ -29,4 +29,8 @@ const endPoints = {
     JOIN_USER_TO_SOCIAL_NETWORK: "/socialnetwork/join",
     LEAVE_USER_TO_SOCIAL_NETWORK: "/socialnetwork/leave",
 
+    UPDATE_USER_DESCRIPTION: "/user/updatedescription",
+
+    SAVE_USER_PICTURY: "/user/savepictury",
+
 }
