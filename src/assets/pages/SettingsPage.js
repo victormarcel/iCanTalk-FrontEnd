@@ -21,7 +21,8 @@ import ImagePicker from 'react-native-image-picker';
 
 import {
     saveUserPictury,
-    setUserImageUrlOnLocalStorageDevice
+    setUserImageUrlOnLocalStorageDevice,
+    getUserAvaliations
 } from "../controllers";
 
 import editButton from "../res/images/baseline_edit_black_18dp.png";
@@ -35,7 +36,11 @@ class SettingsPage extends Component {
 
         this.state = {
             imageUrl: "",
-            isLoadingPictury: false
+            isLoadingPictury: false,
+            friendly: 0,
+            goodFluency: 0,
+            responseTime: 0,
+            isFindAvaliations: true
         }
 
     }
@@ -46,6 +51,25 @@ class SettingsPage extends Component {
         const userPicturyUrl = userInfos.pictureUrl;
 
         this.setState({imageUrl: userPicturyUrl ? userPicturyUrl : defaultImageUrl});
+
+    }
+
+    componentDidMount() {
+
+        const { userInfos } = this.props;
+
+        getUserAvaliations(userInfos.id).then(response => {
+            
+            this.setState(
+                {
+                    isFindAvaliations: false,
+                    friendly: response["1"],
+                    goodFluency: response["2"],
+                    responseTime: response["3"]
+                }
+            )
+
+        });
 
     }
 
@@ -166,10 +190,51 @@ class SettingsPage extends Component {
 
     }
 
+    buildAvaliation(){
+
+        const { 
+            friendly,
+            goodFluency,
+            responseTime
+         } = this.state;
+        const { isFindAvaliations } = this.state;
+
+        if(isFindAvaliations){
+            return (
+                <ActivityIndicator 
+                    style = { styles.fetchPictury }
+                    size = "large" 
+                    color = { Colors.appDefaultColor } />
+            );
+        } else {
+
+            return (
+                <View>
+                    <AvaliationComponent
+                        label = { getStringByCode("FRIENDLY") }
+                        readOnly = { true }
+                        startState = { friendly }/>
+                    <AvaliationComponent
+                        label = { getStringByCode("GOOD_FLUENCY") }
+                        readOnly = { true }
+                        startState = { goodFluency }/>
+                    <AvaliationComponent
+                        label = { getStringByCode("RESPONSE_TIME") }
+                        readOnly = { false }
+                        startState = { responseTime }/>
+                </View>
+            );
+            
+        }
+
+    }
+
     render() {
 
         const { userInfos } = this.props;
-        const { imageUrl } = this.state;
+        const { 
+            imageUrl
+         } = this.state;
 
         return (
             <View style = { styles.container }>
@@ -182,7 +247,7 @@ class SettingsPage extends Component {
                         { this.showPicturyLoading() }
                     </View>
                     <View style = { styles.titles }>
-                        <Text style = { styles.title }>Victor</Text>
+                        <Text style = { styles.title }>{ userInfos.name }</Text>
                         <Text style = { styles.description }>{ this.formatDescription(userInfos.description) }</Text>
                     </View>
                     <TouchableOpacity onPress = { () => this.goToDescriptionEditPage() }>
@@ -206,12 +271,7 @@ class SettingsPage extends Component {
                     />
                 </View>
                 <View style = { styles.userAvaliations }>
-                    <AvaliationComponent
-                        label = "Avaliação"/>
-                    <AvaliationComponent
-                        label = "Avaliação"/>
-                    <AvaliationComponent
-                        label = "Avaliação"/>
+                    { this.buildAvaliation() }
                 </View>
             </View>
         );

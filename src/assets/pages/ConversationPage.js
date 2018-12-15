@@ -6,6 +6,7 @@ import {
     ScrollView
 } from 'react-native';
 import { connect } from "react-redux";
+import firebase from 'react-native-firebase';
 
 import SearchInputTop from "../components/SearchInputTop";
 import ConversationItem from "../components/ConversationItem";
@@ -14,7 +15,10 @@ import FooterButtons from "../components/FooterButtons";
 import { 
     getUserinfosOnDeviceLocalStorage,
     fcmOnMessage,
-    getItemOnDeviceLocalStorage
+    getItemOnDeviceLocalStorage,
+    removeItemOnDeviceLocalStorage,
+    fcmOnNotificationClick,
+    getConversationByUserId
 } from "../utils";
 import { 
     setUserInfos,
@@ -77,6 +81,30 @@ class ConversationPage extends Component {
 
     }
 
+    componentDidMount() {
+
+        firebase.messaging().getToken()
+        .then(fcmToken => {
+            if (fcmToken) {
+                console.log(fcmToken);
+            } else {
+                console.log("Novo token: " + fcmToken);
+            } 
+        });
+
+        this.fcmOnNotificationClick = firebase.notifications().onNotificationOpened((response) => {
+
+            let data = response.notification.data;
+            const conversation = getConversationByUserId(data.senderId);
+
+            this.navigateToChat(conversation);
+
+        });
+
+        this.setState({conversations: this.props.conversations});
+
+    }
+
     componentWillMount() {
 
         this.setUserInfosOnReducer();
@@ -116,6 +144,8 @@ class ConversationPage extends Component {
     
     componentWillUnmount() {
         fcmOnMessage();
+        fcmOnNotificationClick();
+
     }
 
     navigateToChat(conversation) {
@@ -129,7 +159,6 @@ class ConversationPage extends Component {
 
         return (
             <View style = { styles.container }>
-                <SearchInputTop/>
                 <ScrollView>
                     <FlatList
                         styles = { styles.flatList }

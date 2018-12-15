@@ -55,6 +55,7 @@ const ptBrStrings = {
     DESCRIPTION: "Descrição",
     EDITION: "Edição",
     CANCEL: "Cancelar",
+    FRIENDLY: "Amigável",
 
     NEW_USER: "Novo Usuário",
     TALKS: "Conversas",
@@ -110,7 +111,12 @@ const ptBrStrings = {
 
     EDIT_PICTURY: "Editar foto",
     SELECT_FROM_LIBRARY: "Selecionar da galeria",
-    TAKE_PHOTO: "Tirar uma foto"
+    TAKE_PHOTO: "Tirar uma foto",
+
+    GOOD_FLUENCY: "Boa fluência",
+    RESPONSE_TIME: "Tempo de resposta",
+    EVALUE_LAST_CONVERSATION: "Por favor, avalie a última conversa.",
+    FINISH_AVALIATION_MESSAGE: "Obrigado pela avaliação."
 
 }
 
@@ -149,6 +155,7 @@ const enBrStrings = {
     DESCRIPTION: "Description",
     EDITION: "Edition",
     CANCEL: "Cancel",
+    FRIENDLY: "Friendly",
 
     NEW_USER: "New User",
     TALKS: "Conversations",
@@ -205,6 +212,11 @@ const enBrStrings = {
     
     EDIT_PICTURY: "Change pictury",
     SELECT_FROM_LIBRARY: "Select from library",
-    TAKE_PHOTO: "Take Photo"
+    TAKE_PHOTO: "Take Photo",
+
+    GOOD_FLUENCY: "Good Fluency",
+    RESPONSE_TIME: "Response Time",
+    EVALUE_LAST_CONVERSATION: "Please, evalue last conversation",
+    FINISH_AVALIATION_MESSAGE: "Thanks for feedback."
 
 }

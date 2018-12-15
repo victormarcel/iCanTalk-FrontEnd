@@ -13,7 +13,7 @@
     "react-native": "0.55.4",
     "react-native-firebase": "^4.3.8",
     "react-native-fs": "2.11.17",
-    "react-native-image-picker": "^0.27.1",
+    "react-native-image-picker": "^0.27.2",
     "react-native-sound": "^0.10.9",
     "react-native-voice": "^0.2.6",
     "react-navigation": "^2.12.1",

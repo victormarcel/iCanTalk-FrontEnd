@@ -34,6 +34,8 @@ class AppLanguagePage extends Component {
 
             if(lang){
                 this.setState({selectedLanguage: lang, langToSave: lang});
+            } else {
+                this.setState({selectedLanguage: "pt", langToSave: "pt"});
             }
 
         });
