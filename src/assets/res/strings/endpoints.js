@@ -33,4 +33,6 @@ const endPoints = {
 
     SAVE_USER_PICTURY: "/user/savepictury",
 
+    GET_USER_AVALIATIONS: "/avaliation/useravaliations",
+    SAVE_AVALIATION: "/avaliation/saveavaliation"
 }

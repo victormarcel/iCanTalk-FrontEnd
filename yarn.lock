@@ -4374,9 +4374,9 @@ react-native-fs@2.11.17:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
 
-react-native-image-picker@^0.27.1:
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.27.1.tgz#32877c667e8c2713466fe178a6c7dd648e6cb5d3"
+react-native-image-picker@^0.27.2:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.27.2.tgz#c44195feb1a4855eead36fadacc8b82828329b2a"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"

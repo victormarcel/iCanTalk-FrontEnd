@@ -8,3 +8,4 @@ export * from "./InterestsPageController";
 export * from "./SocialNetworkController";
 export * from "./DescriptionEditPageController";
 export * from "./SettingsPageController";
+export * from "./AvaliationController";

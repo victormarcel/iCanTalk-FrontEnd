@@ -17,7 +17,7 @@ class AvaliationComponent extends Component {
         super(props);
 
         this.state = {
-            1: true,
+            1: false,
             2: false,
             3: false,
             4: false,
@@ -26,12 +26,22 @@ class AvaliationComponent extends Component {
 
     }
 
+    componentDidMount() {
+        
+        const { startState } = this.props;
+        this.setStartState(startState);
+
+    }
+
     buildStart(startNumber) {
 
         const stateStar = this.state[startNumber];
+        const { readOnly } = this.props
 
         return (
-            <TouchableOpacity onPress = { () => this.setStartState(startNumber) }>
+            <TouchableOpacity 
+                onPress = { readOnly ? null : () => this.setStartState(startNumber) }
+                disabled = { readOnly } >
                 <Image 
                     style = { styles.starButton }
                     source = { stateStar ? checkedStart : emptyStart }
@@ -49,6 +59,11 @@ class AvaliationComponent extends Component {
 
         for(var i = startNumber + 1; i <= 5; i++){
             this.setState({[i]: false})
+        }
+
+        const { onSetState } = this.props;
+        if(onSetState){
+            onSetState.call(null, startNumber);
         }
 
     }

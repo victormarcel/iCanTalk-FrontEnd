@@ -18,8 +18,11 @@ import {
     relateMessageToChat
 } from "../utils";
 import { 
-    sendMessageByFcmToken
+    sendMessageByFcmToken,
+    isEvaluable
 } from "../controllers";
+
+import { setCurrentConversation } from "../../redux/actions";
 
 import Message from "../components/Message";
 import { Colors } from "../res/styles/colors";
@@ -61,18 +64,19 @@ class ChatPage extends Component {
 
         Voice.onSpeechStart = this.onSpeechStart.bind(this)
         Voice.onSpeechResults = this.onSpeechResults.bind(this)
-        //Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this)
+        Voice.onSpeechEnd  = this.onSpeechEndHandler.bind(this)
+        Voice.onSpeechError = this._onSpeechError.bind(this)
 
     }
 
-    componentWillMount() {
-
-        const { MESSAGES } = this.props.currentConversation;
-
-        if(MESSAGES){
-            this.setState({messages: this.props.currentConversation.MESSAGES});
-        }
-
+    _onSpeechError() {
+        Voice.cancel();
+        this.setState(
+            {
+                startSpeechDisabled: false,
+                TouchableOpacityMic: 1
+            }
+        );
     }
 
     onSpeechResults(result){
@@ -86,6 +90,16 @@ class ChatPage extends Component {
         );
 
     }
+
+    onSpeechEndHandler(){
+        Voice.stop();
+        this.setState(
+            {
+                startSpeechDisabled: false,
+                TouchableOpacityMic: 1
+            }
+        );
+    }
         
     onSpeechStart(e){
         this.setState(
@@ -94,6 +108,50 @@ class ChatPage extends Component {
                 TouchableOpacityMic: 0.3
             }
         );
+    }
+
+    componentWillMount() {
+
+        const { MESSAGES } = this.props.currentConversation;
+
+        if(MESSAGES){
+            this.setState({messages: this.props.currentConversation.MESSAGES});
+        }
+
+    }
+
+    componentDidMount() {
+
+        this.props.navigation.addListener(
+            'didBlur',
+            payload => {
+
+                if(!payload.lastState){
+                    this.openAvaliationPage();
+                    this.props.setCurrentConversation({});
+                }
+                
+            }
+        );
+
+    }
+
+    openAvaliationPage() {
+        
+        const { currentConversation } = this.props;
+
+        isEvaluable(currentConversation).then(response => {
+
+            if(response){
+                
+                this.props.navigation.navigate(
+                    "AvaliationPage", 
+                    {currentConversation: currentConversation}
+                );
+            }
+
+        });
+
     }
 
     startSpeech() {
@@ -271,6 +329,10 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapDispatchToProps = {
+    setCurrentConversation
+}
+
 const mapStateToProps = state => {
     return {
         userInfos: state.userInfos,
@@ -278,4 +340,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(ChatPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatPage);

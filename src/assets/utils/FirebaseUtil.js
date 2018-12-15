@@ -3,6 +3,8 @@ import {
 } from "react-native";
 import firebase from 'react-native-firebase';
 
+import { store } from "../../../store";
+
 import {
     relateMessageToChat,
     setOnlineUsersOnRedux,
@@ -48,6 +50,7 @@ export const fcmOnMessage = firebase.messaging().onMessage((message) => {
         }
 
         relateMessageToChat(messageInfos);
+        displayNotification(receivedMessageInfos);
 
     } else if (message.data.type === "new_user_socialnetwork"){
         addNewOnlineUserToSocialNetWork(message.data);
@@ -59,7 +62,29 @@ export const fcmOnMessage = firebase.messaging().onMessage((message) => {
 
 });
 
+const displayNotification = (data) => {
 
+    const currentConversation = store.getState().currentConversation;
+
+    if(!Boolean(currentConversation.SECONDARY_USER_ID) || currentConversation.SECONDARY_USER_ID != data.senderId){
+
+        const localNotification = new firebase.notifications.Notification({
+            sound: "default",
+            show_in_foreground: true,
+        })
+        .setNotificationId("id")
+        .setTitle(data.senderName)
+        .setBody(data.message)
+        .setData(data)
+        .android.setChannelId('test-channel') // e.g. the id you chose 
+        .android.setPriority(firebase.notifications.Android.Priority.Max);
+    
+    
+        firebase.notifications().displayNotification(localNotification)
+
+    }
+        
+}
 
 // Criando ou recuperando um token para um device;
         /*firebase.messaging().getToken()

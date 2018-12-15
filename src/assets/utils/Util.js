@@ -124,7 +124,7 @@ export const createConversationObject = (messageInfos) => {
         FCM_TOKEN: messageInfos.secondaryUserFcmToken,
         MESSAGES: [buildedMessage],
         LAST_MESSAGE: messageInfos.firstMessage,
-        LAST_MESSAGE_HOUR: moment().format("HH:MM")
+        LAST_MESSAGE_HOUR: moment().format("HH:mm")
     }
 
     return conversation;
@@ -158,14 +158,28 @@ export const pushToConversationSendedMessage = (conversation, messageInfos) => {
     conversation.LAST_MESSAGE = message;
     conversation.LAST_MESSAGE_HOUR = moment().format("HH:mm");
 
-    updateCurrentConversation(buildedMessage);
-    updateConversationOnRedux(conversation);
+    updateConversationOnReceiveMessage(buildedMessage, conversation);
     pushMessageToSavedConversation(conversation, buildedMessage);
 
 }
 
+const updateConversationOnReceiveMessage = (message, conversation) => {
+
+    const reduxState = store.getState();
+    const currentConversation = reduxState.currentConversation;
+
+    if(Boolean(currentConversation.MESSAGES)){
+        updateCurrentConversation(message);
+    } else {
+        conversation.MESSAGES.push(message);
+    }
+
+    updateConversationOnRedux(conversation);
+
+}
+
 export const updateConversationOnRedux = conversation => {
-    store.dispatch(updateConversation(conversation));
+store.dispatch(updateConversation(conversation));
 }
 
 export const updateCurrentConversation = message => {
